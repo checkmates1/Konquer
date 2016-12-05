@@ -1,3 +1,4 @@
+sudo: required
 language: ruby
 rvm:
 - 2.2.4
@@ -7,9 +8,10 @@ install:
 script:
 - bin/rake db:create db:migrate
 - bundle exec rspec
+- bundle exec rubocop
 deploy:
   provider: heroku
   api_key:
     secure: f3bb0d1f-e1fd-438b-ba27-e49d475336ca
-  app: 
+  app:
     master: mikes-checkmates
