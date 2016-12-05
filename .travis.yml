@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+- 2.2.4
+before_install: gem update --remote bundler
+install:
+- bundle install --retry=3
+script:
+- bin/rake db:create db:migrate
+- bundle exec rspec
+deploy:
+  provider: heroku
+  api_key:
+    secure: f3bb0d1f-e1fd-438b-ba27-e49d475336ca
+  app: mikes-checkmates
