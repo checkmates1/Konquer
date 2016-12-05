@@ -11,4 +11,5 @@ deploy:
   provider: heroku
   api_key:
     secure: f3bb0d1f-e1fd-438b-ba27-e49d475336ca
-  app: mikes-checkmates
+  app: 
+    master: mikes-checkmates
