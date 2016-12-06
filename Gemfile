@@ -44,5 +44,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
 end
 
-gem 'materialize-sass'
 gem 'devise', '~> 4.1.1'
+gem 'materialize-sass'
