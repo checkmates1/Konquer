@@ -28,6 +28,8 @@ gem 'spring', group: :development
 # RuboCop is a Ruby static code analyzer. Out of the box it will enforce many of the guidelines outlined in the community Ruby Style Guide.
 gem 'rubocop', '~> 0.46.0', require: false
 
+# use simple_form gem
+gem 'simple_form'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
