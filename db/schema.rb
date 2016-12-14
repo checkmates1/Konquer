@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213193746) do
+ActiveRecord::Schema.define(version: 20161214235311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20161213193746) do
 
   create_table "pieces", force: true do |t|
     t.string   "type"
-    t.integer  "column"
-    t.integer  "row"
+    t.integer  "x_position"
+    t.integer  "y_position"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status",     default: 1
