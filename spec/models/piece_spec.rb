@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "horizontal obstruction" do
+    it "should return false if horizontally obstructed" do
+    end
+  end
 end
