@@ -16,4 +16,22 @@ class Piece < ActiveRecord::Base
   def types
     %w(Pawn Rook Knight Bishop Queen King)
   end
+
+  def obstructed?(destination_x, destination_y)
+    current_piece = self
+
+    x_diff = self.x_position - destination_x
+    y_diff = self.y_position - destination_y
+
+    if (x_diff == y_diff)
+      return 'diagonal'
+    elsif (x_diff == 0 && y_diff != 0)
+      return 'vertical'
+    elsif (y_diff == 0 && x_diff != 0)
+      return 'horizontal'
+    else
+      return nil
+    end
+
+  end
 end
