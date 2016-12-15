@@ -5,15 +5,4 @@ class Game < ActiveRecord::Base
   belongs_to :active_player
 
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
-  
-  board = [
-         [0,0,0,0,0,0,0,0],
-         [0,0,0,0,0,0,0,0],
-         [0,0,0,0,0,0,0,0],
-         [0,0,0,0,0,0,0,0],
-         [0,0,0,0,0,0,0,0],
-         [0,0,0,0,0,0,0,0],
-         [0,0,0,0,0,0,0,0],
-         [0,0,0,0,0,0,0,0]
-       ]
 end

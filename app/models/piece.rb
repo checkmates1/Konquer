@@ -22,15 +22,37 @@ class Piece < ActiveRecord::Base
     x = self.x_position
     y = self.y_position
 
-    x_diff = self.x - destination_x
-    y_diff = self.y - destination_y
+    @x_diff = x - destination_x
+    @y_diff = y - destination_y
 
-    if (x_diff == y_diff)
+    if (@x_diff == @y_diff)
       return 'diagonal'
-    elsif (x_diff == 0 && y_diff != 0)
+    elsif (@x_diff == 0 && @y_diff != 0)
       return 'vertical'
-    elsif (y_diff == 0 && x_diff != 0)
-      return 'horizontal'
+    elsif (@y_diff == 0 && @x_diff != 0)
+      def horizontal
+        # row = board[y]
+        # destination is to the right
+        if @x_diff < 0 
+          current_piece(x).upto(destination_x) do |i|
+            if i != 0
+              return true
+            else
+              return false
+            end
+          end
+        # destination is to the left
+        elsif x_diff > 0
+          current_piece(x).downto(destination_x) do |i|
+            if i != 0
+              return true
+            else
+              return false
+            end
+          end
+        end
+      end
+      horizontal
     else
       return nil
     end
@@ -39,27 +61,12 @@ class Piece < ActiveRecord::Base
     end
 
     def vertical
-      if y_diff < 0
+      # if y_diff < 0
 
-      end
-      elsif y_diff > 0
+      # end
+      # elsif y_diff > 0
 
-      end
-    end
-
-    def horizontal
-      row = board[y]
-      # destination is to the right
-      
-      if x_diff < 0 
-        current_piece(x).upto(destination_x) do |x|
-          if x != 0
-            return true
-          end
-        end
-      # destination is to the left
-      elsif x_diff > 0
-      end
+      # end
     end
   end
 end

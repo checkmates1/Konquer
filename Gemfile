@@ -48,3 +48,4 @@ end
 
 gem 'devise', '~> 4.1.1'
 gem 'materialize-sass'
+gem 'factory_girl_rails', "~> 4.0"
