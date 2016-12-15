@@ -47,7 +47,11 @@ class Piece < ActiveRecord::Base
 
   def obstructed_diagonally?(destination_x, destination_y)
     return false unless (y_position - destination_y == x_position - destination_x) 
-    # return true if piece_exist?
+    for i in x_position..destination_x
+      for j in y_position..destination_y
+        return true if i != nil && j != nil
+      end
+    end
   end
 
 end
