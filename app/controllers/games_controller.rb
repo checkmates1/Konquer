@@ -8,6 +8,6 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(:id)
+    @game = Game.find_by(:id)
   end
 end
