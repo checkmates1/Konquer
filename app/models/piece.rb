@@ -18,55 +18,36 @@ class Piece < ActiveRecord::Base
   end
 
   def obstructed?(destination_x, destination_y)
-    current_piece = self
-    x = self.x_position
-    y = self.y_position
+    return true if obstructed_horizontally?(destination_x, destination_y)
+    return true if obstructed_vertically?(destination_x, destination_y)
+    return true if obstructed_diagonally?(destination_x, destination_y)
+    return nil if !((y_position - destination_y == 0 && x_position - destination_x != 0) || (x_position - destination_x == 0 && y_position - destination_y != 0) || (y_position - destination_y == x_position - destination_x))
+    false
+  end
 
-    @x_diff = x - destination_x
-    @y_diff = y - destination_y
+  private
 
-    if (@x_diff == @y_diff)
-      return 'diagonal'
-    elsif (@x_diff == 0 && @y_diff != 0)
-      return 'vertical'
-    elsif (@y_diff == 0 && @x_diff != 0)
-      def horizontal
-        # row = board[y]
-        # destination is to the right
-        if @x_diff < 0 
-          current_piece(x).upto(destination_x) do |i|
-            if i != 0
-              return true
-            else
-              return false
-            end
-          end
-        # destination is to the left
-        elsif x_diff > 0
-          current_piece(x).downto(destination_x) do |i|
-            if i != 0
-              return true
-            else
-              return false
-            end
-          end
-        end
-      end
-      horizontal
-    else
-      return nil
+  def obstructed_horizontally?(destination_x, destination_y)
+    # first line should be a "guard statement". It checks if this method should even be run
+    # Is this even a horizontal move? 
+    return false unless (y_position - destination_y == 0 && x_position - destination_x != 0) # is the move horizontal?
+    for i in x_position..destination_x
+      return true if i != nil
     end
+    # after the guard statement, we know this move is horizontal. 
+    # So check if any pieces exist between the start and destination. Return true if any exist
+  end
 
-    def diagonal
-    end
-
-    def vertical
-      # if y_diff < 0
-
-      # end
-      # elsif y_diff > 0
-
-      # end
+  def obstructed_vertically?(destination_x, destination_y)
+    return false unless (x_position - destination_x == 0 && y_position - destination_y != 0) 
+    for i in y_position..destination_y
+      return true if i != nil
     end
   end
+
+  def obstructed_diagonally?(destination_x, destination_y)
+    return false unless (y_position - destination_y == x_position - destination_x) 
+    # return true if piece_exist?
+  end
+
 end

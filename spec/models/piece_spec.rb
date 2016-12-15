@@ -8,8 +8,6 @@ RSpec.describe Piece, type: :model do
     end
 
     it "should return true if obstructed on right" do
-      game = FactoryGirl.create(:miniboard)
-      game = Game.new.initialize_board
       pieceA = Piece.create(x_position: 1, y_position: 1)
       pieceB = Piece.create(x_position: 3, y_position: 1)
       expect(pieceA.obstructed?(5,1)).to eq true

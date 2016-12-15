@@ -7,14 +7,5 @@ FactoryGirl.define do
     password_confirmation "secretPassword"
     
   end
-  factory :game do
-    miniboard = [
-       [0,0,0,0,0],
-       [0,0,0,0,0],
-       [0,0,0,0,0],
-       [0,0,0,0,0],
-       [0,0,0,0,0]
-     ]
-  end
 
 end
