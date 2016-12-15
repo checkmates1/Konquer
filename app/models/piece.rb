@@ -19,9 +19,11 @@ class Piece < ActiveRecord::Base
 
   def obstructed?(destination_x, destination_y)
     current_piece = self
+    x = self.x_position
+    y = self.y_position
 
-    x_diff = self.x_position - destination_x
-    y_diff = self.y_position - destination_y
+    x_diff = self.x - destination_x
+    y_diff = self.y - destination_y
 
     if (x_diff == y_diff)
       return 'diagonal'
@@ -33,5 +35,31 @@ class Piece < ActiveRecord::Base
       return nil
     end
 
+    def diagonal
+    end
+
+    def vertical
+      if y_diff < 0
+
+      end
+      elsif y_diff > 0
+
+      end
+    end
+
+    def horizontal
+      row = board[y]
+      # destination is to the right
+      
+      if x_diff < 0 
+        current_piece(x).upto(destination_x) do |x|
+          if x != 0
+            return true
+          end
+        end
+      # destination is to the left
+      elsif x_diff > 0
+      end
+    end
   end
 end
