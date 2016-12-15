@@ -1,3 +1,56 @@
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+div.frame{
+  background:url(frame.png) no-repeat;
+  background-size: cover;
+}
+.padding{
+  padding-left:15px;
+}
+.back {
+  position: absolute;
+  top:0;
+  width: 40em;
+  height: 40em;
+}
+div.row div {
+    width: 4em;
+    height: 4em;
+    margin-bottom: -20px;
+    }
+div.row {
+      padding-left: 10;
+      padding-right: 10;
+    }
+    div.row.top{
+      padding-top: 10;
+    }
+    div.row.bottom{
+      padding-bottom: 10;
+    }
+.main {
+  flex: 1 0 auto;
+  justify-content: center;
+  background:url(grass.jpg) no-repeat 0,0;
+  background-size: cover;
+}
+a {
+  color: #00FF00;
+}
+ @media screen and (min-width:320px)
+    and (max-width:600px){
+    div.row div {
+    width: 3em;
+    height: 3em;
+    margin-bottom: -20px;
+    }
+}
+ @media screen and (min-width:600px)
+    and (max-width:720px){
+    div.row div {
+    width: 4em;
+    height: 4em;
+    margin-bottom: -20px;
+    }
+}
