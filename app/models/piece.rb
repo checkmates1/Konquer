@@ -56,25 +56,36 @@ class Piece < ActiveRecord::Base
   end
 
   def check_diagonal?(destination_x, destination_y)
-    (@current_x...destination_x).map.with_index do |x, i|
-      # x is x value
-      # i is distance from original space
-      # y is starting y plus i times direction of y
-      y = current_y + (i * @y_direction)
-      return @board[x][y] if @board[x][y] != 0
+    if @x_direction < 0
+      (@current_x..destination_x).each_with_index do |x, i|
+        # x is x value
+        # i is distance from original space
+        # y is starting y plus i times direction of y
+        y = @current_y + (i * -@y_direction)
+        return [x, y] if @board[y][x] != 0
+      end
+    else
+      (destination_x..@current_x).each.with_index do |x, i|
+        # x is x value
+        # i is distance from original space
+        # y is starting y plus i times direction of y
+        y = @current_y + (i * -@y_direction)
+        return [x, y] if @board[y][x] != 0
+      end
     end
+
   end
 
   def check_vertical?(destination_y)
     if @y_direction < 0
       (@current_y..destination_y).each do |y|
         #check if space is zero, or nil, depending on how @board is built
-        return [@current_x, y] if @board[@current_x][y] != 0
+        return [@current_x, y] if @board[y][@current_x] != 0
       end
     else
       (destination_y..@current_y).each do |y|
         #check if space is zero, or nil, depending on how @board is built
-        return [@current_x, y] if @board[@current_x][y] != 0
+        return [@current_x, y] if @board[y][@current_x] != 0
       end
     end
   end
@@ -83,12 +94,12 @@ class Piece < ActiveRecord::Base
     if @x_direction < 0
       (@current_x..destination_x).each do |x|
         #check if space is zero, or nil, depending on how @board is built
-        return [x, @current_y] if @board[x][@current_y] != 0
+        return [x, @current_y] if @board[@current_y][x] != 0
       end
     else
       (destination_x..@current_x).each do |x|
         #check if space is zero, or nil, depending on how @board is built
-        return [x, @current_y] if @board[x][@current_y] != 0
+        return [x, @current_y] if @board[@current_y][x] != 0
       end
     end
   end

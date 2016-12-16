@@ -33,8 +33,8 @@ RSpec.describe Piece, type: :model do
     end
 
     it "should return position if obstructed diagonal up-left" do
-      piece = Piece.create(x_position: 0, y_position: 4)
-      expect(piece.obstructed?(4,0)).to eq [2, 2]
+      piece = Piece.create(x_position: 4, y_position: 4)
+      expect(piece.obstructed?(0,0)).to eq [2, 2]
     end
   end
 end
