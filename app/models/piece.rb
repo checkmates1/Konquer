@@ -66,9 +66,16 @@ class Piece < ActiveRecord::Base
   end
 
   def check_vertical?(destination_y)
-    (@current_y...destination_y).each do |y|
-      #check if space is zero, or nil, depending on how @board is built
-      return @board[@current_x][y] if @board[@current_x][y] != 0
+    if @y_direction < 0
+      (@current_y..destination_y).each do |y|
+        #check if space is zero, or nil, depending on how @board is built
+        return [@current_x, y] if @board[@current_x][y] != 0
+      end
+    else
+      (destination_y..@current_y).each do |y|
+        #check if space is zero, or nil, depending on how @board is built
+        return [@current_x, y] if @board[@current_x][y] != 0
+      end
     end
   end
 
@@ -76,12 +83,12 @@ class Piece < ActiveRecord::Base
     if @x_direction < 0
       (@current_x..destination_x).each do |x|
         #check if space is zero, or nil, depending on how @board is built
-        return "#{x}, #{@current_y}" if @board[x][@current_y] != 0
+        return [x, @current_y] if @board[x][@current_y] != 0
       end
     else
       (destination_x..@current_x).each do |x|
         #check if space is zero, or nil, depending on how @board is built
-        return "#{x}, #{@current_y}" if @board[x][@current_y] != 0
+        return [x, @current_y] if @board[x][@current_y] != 0
       end
     end
   end
