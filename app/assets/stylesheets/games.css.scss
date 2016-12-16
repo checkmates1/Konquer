@@ -5,9 +5,6 @@ div.frame{
   background:url(frame.png) no-repeat;
   background-size: cover;
 }
-.padding{
-  padding-left:15px;
-}
 
 .back {
   position: absolute;
@@ -15,11 +12,6 @@ div.frame{
   width: 40em;
   height: 40em;
 }
-div.row div {
-    width: 4em;
-    height: 4em;
-    margin-bottom: -20px;
-    }
 
 .grass {
   flex: 1 0 auto;
@@ -27,9 +19,7 @@ div.row div {
   background:url(grass.jpg) no-repeat 0,0;
   background-size: cover;
 }
-a {
-  color: #00FF00;
-}
+
  @media screen and (min-width:320px)
     and (max-width:600px){
     div.row div {
