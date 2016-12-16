@@ -17,39 +17,71 @@ class Piece < ActiveRecord::Base
     %w(Pawn Rook Knight Bishop Queen King)
   end
 
+
   def obstructed?(destination_x, destination_y)
-    return true if obstructed_horizontally?(destination_x, destination_y)
-    return true if obstructed_vertically?(destination_x, destination_y)
-    return true if obstructed_diagonally?(destination_x, destination_y)
-    return nil if !((y_position - destination_y == 0 && x_position - destination_x != 0) || (x_position - destination_x == 0 && y_position - destination_y != 0) || (y_position - destination_y == x_position - destination_x))
-    false
-  end
 
-  private
+    # initialize placeholder board
+    @board = [
+       [0,0,0,0,0],
+       [0,0,0,0,0],
+       [0,0,1,0,0],
+       [0,0,0,0,0],
+       [0,0,0,0,0]
+     ]
 
-  def obstructed_horizontally?(destination_x, destination_y)
-    # first line should be a "guard statement". It checks if this method should even be run
-    # Is this even a horizontal move? 
-    return false unless (y_position - destination_y == 0 && x_position - destination_x != 0) # is the move horizontal?
-    for i in x_position..destination_x
-      return true if i != nil
+    # set common variables
+    @current_x = self.x_position
+    @current_y = self.y_position
+
+    @destination_x = destination_x
+    @destination_y = destination_y
+
+    x_difference = @current_x - destination_x
+    y_difference = @current_y - destination_y
+
+    @x_direction = x_difference <=> 0
+    @y_direction = y_difference <=> 0
+
+    # determine type of move and call relevant method
+    if (x_difference.abs == y_difference.abs)
+      return check_diagonal?(destination_x, destination_y)
+    elsif (x_difference == 0 && y_difference != 0)
+      return check_vertical?(destination_y)
+    elsif (y_difference == 0 && x_difference != 0)
+      return check_horizontal?(destination_x)
+    else
+      return nil
     end
-    # after the guard statement, we know this move is horizontal. 
-    # So check if any pieces exist between the start and destination. Return true if any exist
+
   end
 
-  def obstructed_vertically?(destination_x, destination_y)
-    return false unless (x_position - destination_x == 0 && y_position - destination_y != 0) 
-    for i in y_position..destination_y
-      return true if i != nil
+  def check_diagonal?(destination_x, destination_y)
+    (@current_x...destination_x).map.with_index do |x, i|
+      # x is x value
+      # i is distance from original space
+      # y is starting y plus i times direction of y
+      y = current_y + (i * @y_direction)
+      return @board[x][y] if @board[x][y] != 0
     end
   end
 
-  def obstructed_diagonally?(destination_x, destination_y)
-    return false unless (y_position - destination_y == x_position - destination_x) 
-    for i in x_position..destination_x
-      for j in y_position..destination_y
-        return true if i != nil && j != nil
+  def check_vertical?(destination_y)
+    (@current_y...destination_y).each do |y|
+      #check if space is zero, or nil, depending on how @board is built
+      return @board[@current_x][y] if @board[@current_x][y] != 0
+    end
+  end
+
+  def check_horizontal?(destination_x)
+    if @x_direction < 0
+      (@current_x..destination_x).each do |x|
+        #check if space is zero, or nil, depending on how @board is built
+        return "#{x}, #{@current_y}" if @board[x][@current_y] != 0
+      end
+    else
+      (destination_x..@current_x).each do |x|
+        #check if space is zero, or nil, depending on how @board is built
+        return "#{x}, #{@current_y}" if @board[x][@current_y] != 0
       end
     end
   end
