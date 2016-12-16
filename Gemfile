@@ -47,6 +47,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
 end
 
+gem 'capybara', '>=2.2.0'
 gem 'devise', '~> 4.1.1'
 gem 'materialize-sass'
-gem 'capybara', '>=2.2.0'

@@ -8,6 +8,6 @@ FactoryGirl.define do
   end
 
   factory :game do
-    name "test"
+    name 'test'
   end
 end
