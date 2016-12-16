@@ -1,4 +1,10 @@
 <h1>Available Games</h1>
+<% if user_signed_in? %>
+  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to 'Sign In', new_user_session_path %>
+  <%= link_to 'Sign Up', new_user_registration_path %>
+<% end %>
 
 <% @available_games.each do |game| %>
   <li><%= link_to game.name, game_path(game) %></li>
