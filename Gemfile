@@ -43,9 +43,9 @@ gem 'simple_form'
 # gem 'debugger', group: [:development, :test]
 
 group :development, :test do
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec-rails', '~> 3.5'
 end
 
 gem 'devise', '~> 4.1.1'
 gem 'materialize-sass'
-gem 'factory_girl_rails', "~> 4.0"
