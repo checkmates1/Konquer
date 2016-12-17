@@ -20,14 +20,14 @@ class Piece < ActiveRecord::Base
   def obstructed?(destination_x, destination_y)
     x_difference = x_position - destination_x
     y_difference = y_position - destination_y
-    return true if diagonal?(destination_x, x_difference, y_difference)
+    return true if diagonal?(destination_x, destination_y, x_difference, y_difference)
     return true if vertical?(destination_y, x_difference, y_difference)
     return true if horizontal?(destination_x, x_difference, y_difference)
     return false if valid_move?(x_difference, y_difference)
     nil
   end
 
-  def diagonal?(destination_x, x_difference, y_difference)
+  def diagonal?(destination_x, destination_y, x_difference, y_difference)
     return false unless x_difference.abs == y_difference.abs && x_difference != 0
     y_direction = -y_difference <=> 0
     if x_difference < 0
@@ -38,7 +38,7 @@ class Piece < ActiveRecord::Base
       return false
     else
       ((destination_x + 1)...x_position).each.with_index do |x, i|
-        y = y_position + ((i + 1) * y_direction)
+        y = destination_y + ((i + 1) * y_direction)
         return true if self.game.pieces.exists?(x_position: x, y_position: y)
       end
       return false
