@@ -3,37 +3,51 @@ require 'rails_helper'
 RSpec.describe Piece, type: :model do
   describe 'obstructed method' do
     it 'should return nil if invalid move' do
-      piece = Piece.create(x_position: 4, y_position: 4)
+      game = FactoryGirl.create(:game)
+      piece = FactoryGirl.create(:piece, x_position: 4, y_position: 4, type: 'Rook', game: game)
       expect(piece.obstructed?(1, 3)).to eq nil
+      game.pieces.exists?(x_position: 1, y_position: 3) # returns true/false
     end
 
     it 'should return position if obstructed on right' do
-      piece = Piece.create(x_position: 0, y_position: 2)
+      game = FactoryGirl.create(:game)
+      piece = FactoryGirl.create(:piece, x_position: 0, y_position: 2, type: 'Rook', game: game)
+      piece_blocker = FactoryGirl.create(:piece, x_position: 2, y_position: 2, type: 'Rook', game: game)
       expect(piece.obstructed?(4, 2)).to eq true
     end
 
     it 'should return position if obstructed on left' do
-      piece = Piece.create(x_position: 4, y_position: 2)
+      game = FactoryGirl.create(:game)
+      piece = FactoryGirl.create(:piece, x_position: 4, y_position: 2, type: 'Rook', game: game)
+      piece_blocker = FactoryGirl.create(:piece, x_position: 2, y_position: 2, type: 'Rook', game: game)
       expect(piece.obstructed?(0, 2)).to eq true
     end
 
     it 'should return position if obstructed below' do
-      piece = Piece.create(x_position: 2, y_position: 0)
+      game = FactoryGirl.create(:game)
+      piece = FactoryGirl.create(:piece, x_position: 2, y_position: 0, type: 'Rook', game: game)
+      piece_blocker = FactoryGirl.create(:piece, x_position: 2, y_position: 2, type: 'Rook', game: game)
       expect(piece.obstructed?(2, 4)).to eq true
     end
 
     it 'should return position if obstructed above' do
-      piece = Piece.create(x_position: 2, y_position: 4)
+      game = FactoryGirl.create(:game)
+      piece = FactoryGirl.create(:piece, x_position: 2, y_position: 4, type: 'Rook', game: game)
+      piece_blocker = FactoryGirl.create(:piece, x_position: 2, y_position: 2, type: 'Rook', game: game)
       expect(piece.obstructed?(2, 0)).to eq true
     end
 
     it 'should return position if obstructed diagonal down-right' do
-      piece = Piece.create(x_position: 0, y_position: 0)
+      game = FactoryGirl.create(:game)
+      piece = FactoryGirl.create(:piece, x_position: 0, y_position: 0, type: 'Rook', game: game)
+      piece_blocker = FactoryGirl.create(:piece, x_position: 2, y_position: 2, type: 'Rook', game: game)
       expect(piece.obstructed?(4, 4)).to eq true
     end
 
     it 'should return position if obstructed diagonal up-left' do
-      piece = Piece.create(x_position: 4, y_position: 4)
+      game = FactoryGirl.create(:game)
+      piece = FactoryGirl.create(:piece, x_position: 4, y_position: 4, type: 'Rook', game: game)
+      piece_blocker = FactoryGirl.create(:piece, x_position: 2, y_position: 2, type: 'Rook', game: game)
       expect(piece.obstructed?(0, 0)).to eq true
     end
   end

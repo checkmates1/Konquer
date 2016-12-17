@@ -18,15 +18,6 @@ class Piece < ActiveRecord::Base
   end
 
   def obstructed?(destination_x, destination_y)
-    # initialize placeholder board
-    @board =
-      [
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]
-      ]
 
     # set common variables
     @current_x = x_position
