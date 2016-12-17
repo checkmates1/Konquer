@@ -6,9 +6,12 @@ FactoryGirl.define do
     password 'secretPassword'
     password_confirmation 'secretPassword'
   end
-  factory :piece do
-  end
 
   factory :game do
+
+  end
+
+  factory :piece do
+    association :game
   end
 end
