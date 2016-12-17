@@ -8,7 +8,6 @@ FactoryGirl.define do
   end
 
   factory :game do
-
   end
 
   factory :piece do

@@ -33,46 +33,43 @@ class Piece < ActiveRecord::Base
     if x_difference < 0
       ((x_position + 1)...destination_x).each_with_index do |x, i|
         y = y_position + ((i + 1) * y_direction)
-        return true if self.game.pieces.exists?(x_position: x, y_position: y)
+        return true if game.pieces.exists?(x_position: x, y_position: y)
       end
-      return false
     else
       ((destination_x + 1)...x_position).each.with_index do |x, i|
         y = destination_y + ((i + 1) * y_direction)
-        return true if self.game.pieces.exists?(x_position: x, y_position: y)
+        return true if game.pieces.exists?(x_position: x, y_position: y)
       end
-      return false
     end
+    false
   end
 
   def vertical?(destination_y, x_difference, y_difference)
     return false unless x_difference.zero? && y_difference != 0
     if y_difference < 0
       ((y_position + 1)...destination_y).each do |y|
-        return true if self.game.pieces.exists?(x_position: x_position, y_position: y)
+        return true if game.pieces.exists?(x_position: x_position, y_position: y)
       end
-      return false
     else
       ((destination_y - 1)...y_position).each do |y|
-        return true if self.game.pieces.exists?(x_position: x_position, y_position: y)
+        return true if game.pieces.exists?(x_position: x_position, y_position: y)
       end
-      return false
     end
+    false
   end
 
   def horizontal?(destination_x, x_difference, y_difference)
     return false unless y_difference.zero? && x_difference != 0
     if x_difference < 0
       ((x_position + 1)...destination_x).each do |x|
-        return true if self.game.pieces.exists?(x_position: x, y_position: y_position)
+        return true if game.pieces.exists?(x_position: x, y_position: y_position)
       end
-      return false
     else
       ((destination_x - 1)...x_position).each do |x|
-        return true if self.game.pieces.exists?(x_position: x, y_position: y_position)
+        return true if game.pieces.exists?(x_position: x, y_position: y_position)
       end
-      return false
     end
+    false
   end
 
   def valid_move?(x_difference, y_difference)
