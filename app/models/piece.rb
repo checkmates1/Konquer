@@ -18,73 +18,56 @@ class Piece < ActiveRecord::Base
   end
 
   def obstructed?(destination_x, destination_y)
-    # set common variables
-    @current_x = x_position
-    @current_y = y_position
-
-    @destination_x = destination_x
-    @destination_y = destination_y
-
-    @x_difference = @current_x - destination_x
-    @y_difference = @current_y - destination_y
-
-    # determine type of move and call relevant method
-    return true if check_diagonal?(destination_x)
-    return true if check_vertical?(destination_y)
-    return true if check_horizontal?(destination_x)
+    return true if check_diagonal?(destination_x, destination_y)
+    return true if check_vertical?(destination_x, destination_y)
+    return true if check_horizontal?(destination_x, destination_y)
     nil
   end
 
-  def check_diagonal?(destination_x)
-    return false unless @x_difference.abs == @y_difference.abs && @x_difference != 0
-    y_direction = -@y_difference <=> 0
-    if @x_difference < 0
-      (@current_x..destination_x).each_with_index do |x, i|
-        # x is x value
-        # i is distance from original space
-        # y is starting y plus i times direction of y
-        y = @current_y + (i * y_direction)
-        return true if self.game.pieces.exists?(x, y) 
+  def check_diagonal?(destination_x, destination_y)
+    x_difference = x_position - destination_x
+    y_difference = y_position - destination_y
+    return false unless x_difference.abs == y_difference.abs && x_difference != 0
+    y_direction = -y_difference <=> 0
+    if x_difference < 0
+      (x_position..destination_x).each_with_index do |x, i|
+        y = y_position + (i * y_direction)
+        return true if self.game.pieces.exists?(x_position: x, y_position: y)
       end
     else
-      (destination_x..@current_x).each.with_index do |x, i|
-        # x is x value
-        # i is distance from original space
-        # y is starting y plus i times direction of y
-        y = @current_y + (i * y_direction)
-        return true if self.game.pieces.exists?(x, y) 
+      (destination_x..x_position).each.with_index do |x, i|
+        y = y_position + (i * y_direction)
+        return true if self.game.pieces.exists?(x_position: x, y_position: y)
       end
     end
   end
 
-  def check_vertical?(destination_y)
-    return false unless @x_difference.zero? && @y_difference != 0
-    if @y_difference < 0
-      (@current_y..destination_y).each do |y|
-        # check if space is zero, or nil, depending on how @board is built
-        return true if self.game.pieces.exists?(x_position, y)
+  def check_vertical?(destination_x, destination_y)
+    x_difference = x_position - destination_x
+    y_difference = y_position - destination_y
+    return false unless x_difference.zero? && y_difference != 0
+    if y_difference < 0
+      (y_position..destination_y).each do |y|
+        return true if self.game.pieces.exists?(x_position: x_position, y_position: y)
       end
     else
-      (destination_y..@current_y).each do |y|
-        # check if space is zero, or nil, depending on how @board is built
-        return true if self.game.pieces.exists?(x_position, y)
-        # return true if @board[y][@current_x] != 0
+      (destination_y..y_position).each do |y|
+        return true if self.game.pieces.exists?(x_position: x_position, y_position: y)
       end
     end
   end
 
-  def check_horizontal?(destination_x)
-    return false unless @y_difference.zero? && @x_difference != 0
-    if @x_difference < 0
-      (@current_x..destination_x).each do |x|
-        # check if space is zero, or nil, depending on how @board is built
-        return true if self.game.pieces.exists?(x, y_position)
+  def check_horizontal?(destination_x, destination_y)
+    x_difference = x_position - destination_x
+    y_difference = y_position - destination_y
+    return false unless y_difference.zero? && x_difference != 0
+    if x_difference < 0
+      (x_position..destination_x).each do |x|
+        return true if self.game.pieces.exists?(x_position: x, y_position: y_position)
       end
     else
-      (destination_x..@current_x).each do |x|
-        # check if space is zero, or nil, depending on how @board is built
-        # return true if @board[@current_y][x] != 0
-        return true if self.game.pieces.exists?(x, y_position)
+      (destination_x..x_position).each do |x|
+        return true if self.game.pieces.exists?(x_position: x, y_position: y_position)
       end
     end
   end
