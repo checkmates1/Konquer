@@ -18,7 +18,6 @@ class Piece < ActiveRecord::Base
   end
 
   def obstructed?(destination_x, destination_y)
-
     # set common variables
     @current_x = x_position
     @current_y = y_position
@@ -45,7 +44,7 @@ class Piece < ActiveRecord::Base
         # i is distance from original space
         # y is starting y plus i times direction of y
         y = @current_y + (i * y_direction)
-        return true if @board[y][x] != 0
+        return true if self.game.pieces.exists?(x, y) 
       end
     else
       (destination_x..@current_x).each.with_index do |x, i|
@@ -53,7 +52,7 @@ class Piece < ActiveRecord::Base
         # i is distance from original space
         # y is starting y plus i times direction of y
         y = @current_y + (i * y_direction)
-        return true if @board[y][x] != 0
+        return true if self.game.pieces.exists?(x, y) 
       end
     end
   end
@@ -63,12 +62,13 @@ class Piece < ActiveRecord::Base
     if @y_difference < 0
       (@current_y..destination_y).each do |y|
         # check if space is zero, or nil, depending on how @board is built
-        return true if @board[y][@current_x] != 0
+        return true if self.game.pieces.exists?(x_position, y)
       end
     else
       (destination_y..@current_y).each do |y|
         # check if space is zero, or nil, depending on how @board is built
-        return true if @board[y][@current_x] != 0
+        return true if self.game.pieces.exists?(x_position, y)
+        # return true if @board[y][@current_x] != 0
       end
     end
   end
@@ -78,12 +78,13 @@ class Piece < ActiveRecord::Base
     if @x_difference < 0
       (@current_x..destination_x).each do |x|
         # check if space is zero, or nil, depending on how @board is built
-        return true if @board[@current_y][x] != 0
+        return true if self.game.pieces.exists?(x, y_position)
       end
     else
       (destination_x..@current_x).each do |x|
         # check if space is zero, or nil, depending on how @board is built
-        return true if @board[@current_y][x] != 0
+        # return true if @board[@current_y][x] != 0
+        return true if self.game.pieces.exists?(x, y_position)
       end
     end
   end

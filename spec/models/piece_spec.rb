@@ -6,7 +6,6 @@ RSpec.describe Piece, type: :model do
       game = FactoryGirl.create(:game)
       piece = FactoryGirl.create(:piece, x_position: 4, y_position: 4, type: 'Rook', game: game)
       expect(piece.obstructed?(1, 3)).to eq nil
-      game.pieces.exists?(x_position: 1, y_position: 3) # returns true/false
     end
 
     it 'should return position if obstructed on right' do
