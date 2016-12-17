@@ -20,51 +20,64 @@ class Piece < ActiveRecord::Base
   def obstructed?(destination_x, destination_y)
     x_difference = x_position - destination_x
     y_difference = y_position - destination_y
-    return true if check_diagonal?(destination_x, x_difference, y_difference)
-    return true if check_vertical?(destination_y, x_difference, y_difference)
-    return true if check_horizontal?(destination_x, x_difference, y_difference)
+    return true if diagonal?(destination_x, x_difference, y_difference)
+    return true if vertical?(destination_y, x_difference, y_difference)
+    return true if horizontal?(destination_x, x_difference, y_difference)
+    return false if valid_move?(x_difference, y_difference)
     nil
   end
 
-  def check_diagonal?(destination_x, x_difference, y_difference)
+  def diagonal?(destination_x, x_difference, y_difference)
     return false unless x_difference.abs == y_difference.abs && x_difference != 0
     y_direction = -y_difference <=> 0
     if x_difference < 0
-      (x_position..destination_x).each_with_index do |x, i|
-        y = y_position + (i * y_direction)
+      ((x_position + 1)...destination_x).each_with_index do |x, i|
+        y = y_position + ((i + 1) * y_direction)
         return true if self.game.pieces.exists?(x_position: x, y_position: y)
       end
+      return false
     else
-      (destination_x..x_position).each.with_index do |x, i|
-        y = y_position + (i * y_direction)
+      ((destination_x + 1)...x_position).each.with_index do |x, i|
+        y = y_position + ((i + 1) * y_direction)
         return true if self.game.pieces.exists?(x_position: x, y_position: y)
       end
+      return false
     end
   end
 
-  def check_vertical?(destination_y, x_difference, y_difference)
+  def vertical?(destination_y, x_difference, y_difference)
     return false unless x_difference.zero? && y_difference != 0
     if y_difference < 0
-      (y_position..destination_y).each do |y|
+      ((y_position + 1)...destination_y).each do |y|
         return true if self.game.pieces.exists?(x_position: x_position, y_position: y)
       end
+      return false
     else
-      (destination_y..y_position).each do |y|
+      ((destination_y - 1)...y_position).each do |y|
         return true if self.game.pieces.exists?(x_position: x_position, y_position: y)
       end
+      return false
     end
   end
 
-  def check_horizontal?(destination_x, x_difference, y_difference)
+  def horizontal?(destination_x, x_difference, y_difference)
     return false unless y_difference.zero? && x_difference != 0
     if x_difference < 0
-      (x_position..destination_x).each do |x|
+      ((x_position + 1)...destination_x).each do |x|
         return true if self.game.pieces.exists?(x_position: x, y_position: y_position)
       end
+      return false
     else
-      (destination_x..x_position).each do |x|
+      ((destination_x - 1)...x_position).each do |x|
         return true if self.game.pieces.exists?(x_position: x, y_position: y_position)
       end
+      return false
     end
+  end
+
+  def valid_move?(x_difference, y_difference)
+    return true if x_difference.abs == y_difference.abs && x_difference != 0
+    return true if x_difference.zero? && y_difference != 0
+    return true if y_difference.zero? && x_difference != 0
   end
 end
