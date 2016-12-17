@@ -20,13 +20,13 @@ class Piece < ActiveRecord::Base
   def obstructed?(destination_x, destination_y)
     x_difference = x_position - destination_x
     y_difference = y_position - destination_y
-    return true if check_diagonal?(destination_x, destination_y, x_difference, y_difference)
-    return true if check_vertical?(destination_x, destination_y, x_difference, y_difference)
-    return true if check_horizontal?(destination_x, destination_y, x_difference, y_difference)
+    return true if check_diagonal?(destination_x, x_difference, y_difference)
+    return true if check_vertical?(destination_y, x_difference, y_difference)
+    return true if check_horizontal?(destination_x, x_difference, y_difference)
     nil
   end
 
-  def check_diagonal?(destination_x, destination_y, x_difference, y_difference)
+  def check_diagonal?(destination_x, x_difference, y_difference)
     return false unless x_difference.abs == y_difference.abs && x_difference != 0
     y_direction = -y_difference <=> 0
     if x_difference < 0
@@ -42,7 +42,7 @@ class Piece < ActiveRecord::Base
     end
   end
 
-  def check_vertical?(destination_x, destination_y, x_difference, y_difference)
+  def check_vertical?(destination_y, x_difference, y_difference)
     return false unless x_difference.zero? && y_difference != 0
     if y_difference < 0
       (y_position..destination_y).each do |y|
@@ -55,7 +55,7 @@ class Piece < ActiveRecord::Base
     end
   end
 
-  def check_horizontal?(destination_x, destination_y, x_difference, y_difference)
+  def check_horizontal?(destination_x, x_difference, y_difference)
     return false unless y_difference.zero? && x_difference != 0
     if x_difference < 0
       (x_position..destination_x).each do |x|
