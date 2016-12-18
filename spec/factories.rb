@@ -8,6 +8,9 @@ FactoryGirl.define do
   end
 
   factory :game do
+    name 'Test_game'
+    association :white_player_id, factory: :user
+    association :black_player_id, factory: :user
   end
 
   factory :piece do

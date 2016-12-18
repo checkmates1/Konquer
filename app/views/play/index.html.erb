@@ -1,1 +1,5 @@
-<h1>so it begins, does travis auto deploy</h1>
+<h1>Available Games</h1>
+
+<% @available_games.each do |game| %>
+  <li><%= link_to game.name, game_path(game) %></li>
+<% end %>
