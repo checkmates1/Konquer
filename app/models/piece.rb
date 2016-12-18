@@ -29,10 +29,10 @@ class Piece < ActiveRecord::Base
 
   def diagonal?(destination_x, destination_y, x_difference, y_difference)
     return false unless x_difference.abs == y_difference.abs && x_difference != 0
-    y_direction = -y_difference <=> 0
+    y_direction = y_difference <=> 0
     if x_difference < 0
       ((x_position + 1)...destination_x).each_with_index do |x, i|
-        y = y_position + ((i + 1) * y_direction)
+        y = y_position + ((i + 1) * -y_direction)
         return true if game.pieces.exists?(x_position: x, y_position: y)
       end
     else
@@ -51,7 +51,7 @@ class Piece < ActiveRecord::Base
         return true if game.pieces.exists?(x_position: x_position, y_position: y)
       end
     else
-      ((destination_y - 1)...y_position).each do |y|
+      ((destination_y + 1)...y_position).each do |y|
         return true if game.pieces.exists?(x_position: x_position, y_position: y)
       end
     end
@@ -65,7 +65,7 @@ class Piece < ActiveRecord::Base
         return true if game.pieces.exists?(x_position: x, y_position: y_position)
       end
     else
-      ((destination_x - 1)...x_position).each do |x|
+      ((destination_x + 1)...x_position).each do |x|
         return true if game.pieces.exists?(x_position: x, y_position: y_position)
       end
     end
