@@ -49,5 +49,19 @@ RSpec.describe Piece, type: :model do
       FactoryGirl.create(:piece, x_position: 2, y_position: 2, type: 'Rook', game: game)
       expect(piece.obstructed?(0, 0)).to eq true
     end
+
+    it 'should return true if obstructed diagonal down-right' do
+      game = FactoryGirl.create(:game)
+      piece = FactoryGirl.create(:piece, x_position: 0, y_position: 4, type: 'Rook', game: game)
+      FactoryGirl.create(:piece, x_position: 2, y_position: 2, type: 'Rook', game: game)
+      expect(piece.obstructed?(4, 0)).to eq true
+    end
+
+    it 'should return true if obstructed diagonal up-left' do
+      game = FactoryGirl.create(:game)
+      piece = FactoryGirl.create(:piece, x_position: 4, y_position: 0, type: 'Rook', game: game)
+      FactoryGirl.create(:piece, x_position: 2, y_position: 2, type: 'Rook', game: game)
+      expect(piece.obstructed?(0, 4)).to eq true
+    end
   end
 end
