@@ -20,14 +20,16 @@ class Piece < ActiveRecord::Base
   def obstructed?(destination_x, destination_y)
     x_difference = x_position - destination_x
     y_difference = y_position - destination_y
-    return true if diagonal?(destination_x, destination_y, x_difference, y_difference)
-    return true if vertical?(destination_y, x_difference, y_difference)
-    return true if horizontal?(destination_x, x_difference, y_difference)
-    return false if valid_move?(x_difference, y_difference)
-    nil
+    return true if diagonal_obstruction?(destination_x, destination_y, x_difference, y_difference)
+    return true if vertical_obstruction?(destination_y, x_difference, y_difference)
+    return true if horizontal_obstruction?(destination_x, x_difference, y_difference)
+    return false if valid_input?(x_difference, y_difference)
+    false
   end
 
-  def diagonal?(destination_x, destination_y, x_difference, y_difference)
+  private 
+
+  def diagonal_obstruction?(destination_x, destination_y, x_difference, y_difference)
     return false unless x_difference.abs == y_difference.abs && x_difference != 0
     y_direction = y_difference <=> 0
     if x_difference < 0
@@ -44,7 +46,7 @@ class Piece < ActiveRecord::Base
     false
   end
 
-  def vertical?(destination_y, x_difference, y_difference)
+  def vertical_obstruction?(destination_y, x_difference, y_difference)
     return false unless x_difference.zero? && y_difference != 0
     if y_difference < 0
       ((y_position + 1)...destination_y).each do |y|
@@ -58,7 +60,7 @@ class Piece < ActiveRecord::Base
     false
   end
 
-  def horizontal?(destination_x, x_difference, y_difference)
+  def horizontal_obstruction?(destination_x, x_difference, y_difference)
     return false unless y_difference.zero? && x_difference != 0
     if x_difference < 0
       ((x_position + 1)...destination_x).each do |x|
@@ -72,7 +74,7 @@ class Piece < ActiveRecord::Base
     false
   end
 
-  def valid_move?(x_difference, y_difference)
+  def valid_input?(x_difference, y_difference)
     return true if x_difference.abs == y_difference.abs && x_difference != 0
     return true if x_difference.zero? && y_difference != 0
     return true if y_difference.zero? && x_difference != 0

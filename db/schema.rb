@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161217174253) do
+ActiveRecord::Schema.define(version: 20161219050011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,8 +40,9 @@ ActiveRecord::Schema.define(version: 20161217174253) do
     t.integer  "game_id"
   end
 
+  add_index "pieces", ["game_id", "y_position", "x_position"], name: "index_pieces_on_game_id_and_y_position_and_x_position", unique: true, using: :btree
+  add_index "pieces", ["game_id"], name: "index_pieces_on_game_id", using: :btree
   add_index "pieces", ["type"], name: "index_pieces_on_type", using: :btree
-  add_index "pieces", ["y_position", "x_position"], name: "index_pieces_on_y_position_and_x_position", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
