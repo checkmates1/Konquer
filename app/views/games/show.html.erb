@@ -1,5 +1,30 @@
 <h1>Join this Game!</h1>
+
+<h6><%= link_to 'Go back to open games', root_path %></h6>
+
 <h3><%= @game.name %></h3>
+
+<% if user_signed_in? %>
+  <% if @game.white_player_id == nil %>
+    <%= link_to 'Join Game', game_path(@game, game: { white_player_id: current_user.id }), method: :put %>
+  <% elsif @game.black_player_id == nil && @game.white_player_id != nil %>
+    <% if @game.white_player_id == current_user.id %>
+      <p> Waiting for one more player </p>
+    <% else %>
+      <p> Only one more player needed! </p>
+      <%= link_to 'Join Game', game_path(@game, game: { black_player_id: current_user.id }), method: :put %>
+    <% end %>
+  <% else %>
+    <p> White Player ID: <%= @game.white_player_id %> </p>
+    <p> Black Player ID: <%= @game.black_player_id %> </p>
+    <p> Game is full.</p>
+    <%= link_to 'Try Another Game', root_path %>
+  <% end %>
+<% else %>
+  <%= link_to 'Sign In To Join', new_user_session_path %>
+  <br  />
+  <%= link_to 'Sign Up To Join', new_user_registration_path %>
+<% end %>
 <div class="grass valign-wrapper green lighten-3">
   <div class="card-panel frame">
     <div class="spacing">
