@@ -27,7 +27,7 @@ class Piece < ActiveRecord::Base
     false
   end
 
-  private 
+  private
 
   def diagonal_obstruction?(destination_x, destination_y, x_difference, y_difference)
     return false unless x_difference.abs == y_difference.abs && x_difference != 0
