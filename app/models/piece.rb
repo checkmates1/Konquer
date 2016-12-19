@@ -23,7 +23,6 @@ class Piece < ActiveRecord::Base
     return true if diagonal_obstruction?(destination_x, destination_y, x_difference, y_difference)
     return true if vertical_obstruction?(destination_y, x_difference, y_difference)
     return true if horizontal_obstruction?(destination_x, x_difference, y_difference)
-    return false if valid_input?(x_difference, y_difference)
     false
   end
 
@@ -72,11 +71,5 @@ class Piece < ActiveRecord::Base
       end
     end
     false
-  end
-
-  def valid_input?(x_difference, y_difference)
-    return true if x_difference.abs == y_difference.abs && x_difference != 0
-    return true if x_difference.zero? && y_difference != 0
-    return true if y_difference.zero? && x_difference != 0
   end
 end
