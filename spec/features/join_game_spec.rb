@@ -11,12 +11,11 @@ RSpec.feature 'join a game' do
       visit game_path(game)
       expect(page).to have_text 'Only one more player needed!'
 
-      find_link('Join Game', visible: :all).visible?
+      find_link('Join Game')
       click_link('Join Game')
       expect(page).to have_text 'Game is full'
 
-      game.reload
-      expect(game.black_player_id).to eq user2.id
+      expect(game.reload.black_player_id).to eq user2.id
     end
   end
 end
