@@ -10,7 +10,7 @@ class Game < ActiveRecord::Base
     #- white - 16
     # Pawn - 8
     (0..7).each do |i|
-      pieces.create(type: 'Pawn', x_position: i, y_position: 0, color: 'white')
+      pieces.create(type: 'Pawn', x_position: i, y_position: 1, color: 'white')
     end
     # Rook - 2
     pieces.create(type: 'Rook', x_position: 0, y_position: 0, color: 'white')
@@ -28,7 +28,7 @@ class Game < ActiveRecord::Base
     #- black - 16
     # Pawn - 8
     (0..7).each do |i|
-      pieces.create(type: 'Pawn', x_position: i, y_position: 7, color: 'black')
+      pieces.create(type: 'Pawn', x_position: i, y_position: 6, color: 'black')
     end
     # Rook - 2
     pieces.create(type: 'Rook', x_position: 0, y_position: 7, color: 'black')
