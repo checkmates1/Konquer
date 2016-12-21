@@ -57,3 +57,16 @@ RSpec.describe Piece, type: :model do
     end
   end
 end
+RSpec.describe '.populate_board!' do
+  it 'creates correct # of pieces' do
+    game = FactoryGirl.create(:game)
+    expect(game.pieces.length).to eq 32
+
+    expect(game.pawns.length).to eq 16
+    expect(game.rooks.length).to eq 4
+    expect(game.knights.length).to eq 4
+    expect(game.bishops.length).to eq 4
+    expect(game.queens.length).to eq 2
+    expect(game.kings.length).to eq 2
+  end
+end
