@@ -56,4 +56,73 @@ RSpec.describe Piece, type: :model do
       expect(piece.obstructed?(0, 4)).to eq true
     end
   end
+  describe '.populate_board!' do
+    it 'creates correct number and color of pieces' do
+      game = FactoryGirl.create(:game)
+      game.populate_board!
+      expect(game.pieces.length).to eq 32
+
+      expect(game.pawns.length).to eq 16
+      expect(game.rooks.length).to eq 4
+      expect(game.knights.length).to eq 4
+      expect(game.bishops.length).to eq 4
+      expect(game.queens.length).to eq 2
+      expect(game.kings.length).to eq 2
+      expect(game.pieces.white.length).to eq 16
+      expect(game.pieces.black.length).to eq 16
+    end
+    it 'creates Pawns in correct positions' do
+      game = FactoryGirl.create(:game)
+      game.populate_board!
+      expect(game.pieces.find_by(x_position: 0, y_position: 1).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 1, y_position: 1).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 2, y_position: 1).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 3, y_position: 1).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 4, y_position: 1).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 5, y_position: 1).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 6, y_position: 1).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 7, y_position: 1).type).to eq 'Pawn'
+
+      expect(game.pieces.find_by(x_position: 0, y_position: 6).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 1, y_position: 6).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 2, y_position: 6).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 3, y_position: 6).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 4, y_position: 6).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 5, y_position: 6).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 6, y_position: 6).type).to eq 'Pawn'
+      expect(game.pieces.find_by(x_position: 7, y_position: 6).type).to eq 'Pawn'
+    end
+    it 'creates Rooks in correct positions' do
+      game = FactoryGirl.create(:game)
+      game.populate_board!
+      expect(game.pieces.find_by(x_position: 0, y_position: 0).type).to eq 'Rook'
+      expect(game.pieces.find_by(x_position: 7, y_position: 0).type).to eq 'Rook'
+      expect(game.pieces.find_by(x_position: 0, y_position: 7).type).to eq 'Rook'
+      expect(game.pieces.find_by(x_position: 7, y_position: 7).type).to eq 'Rook'
+    end
+    it 'creates Knights in correct positions' do
+      game = FactoryGirl.create(:game)
+      game.populate_board!
+      expect(game.pieces.find_by(x_position: 1, y_position: 0).type).to eq 'Knight'
+      expect(game.pieces.find_by(x_position: 6, y_position: 0).type).to eq 'Knight'
+      expect(game.pieces.find_by(x_position: 1, y_position: 7).type).to eq 'Knight'
+      expect(game.pieces.find_by(x_position: 6, y_position: 7).type).to eq 'Knight'
+    end
+    it 'creates Bishops in correct positions' do
+      game = FactoryGirl.create(:game)
+      game.populate_board!
+      expect(game.pieces.find_by(x_position: 2, y_position: 0).type).to eq 'Bishop'
+      expect(game.pieces.find_by(x_position: 5, y_position: 0).type).to eq 'Bishop'
+      expect(game.pieces.find_by(x_position: 2, y_position: 7).type).to eq 'Bishop'
+      expect(game.pieces.find_by(x_position: 5, y_position: 7).type).to eq 'Bishop'
+    end
+    it 'creates Queens and Kings in correct positions' do
+      game = FactoryGirl.create(:game)
+      game.populate_board!
+      expect(game.pieces.find_by(x_position: 4, y_position: 0).type).to eq 'Queen'
+      expect(game.pieces.find_by(x_position: 3, y_position: 0).type).to eq 'King'
+      expect(game.pieces.find_by(x_position: 3, y_position: 7).type).to eq 'Queen'
+      expect(game.pieces.find_by(x_position: 4, y_position: 7).type).to eq 'King'
+    end
+  end
 end

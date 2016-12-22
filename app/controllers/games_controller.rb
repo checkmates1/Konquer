@@ -5,6 +5,9 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create
+    game.populate_board!
+
+    redirect_to game_path(@game)
   end
 
   def show
