@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :rook do
+
+  end
   factory :user do
     sequence :email do |n|
       "dummyEmail#{n}@gmail.com"
@@ -15,5 +18,9 @@ FactoryGirl.define do
 
   factory :piece do
     association :game
+
+    factory :rook do
+      type 'Rook'
+    end
   end
 end
