@@ -16,4 +16,8 @@ FactoryGirl.define do
   factory :piece do
     association :game
   end
+
+  factory :rook, parent: :piece, class: 'Rook' do
+    type 'Rook'
+  end
 end
