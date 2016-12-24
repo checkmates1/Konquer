@@ -10,14 +10,15 @@ class Pawn < Piece
   private
 
   def vertical_move(destination_y, x_difference, y_difference)
-    return false unless (y_difference == 1 && x_difference == 0)
+    return false unless y_difference == 1 && x_difference.zero?
     return true unless vertical_obstruction?(destination_y, x_difference, y_difference)
     false
   end
+
   # how to test for pawns first move??
   # capture logic???
   def horizontal_move(destination_x, x_difference, y_difference)
-    return false unless (y_difference == 0 && x_difference.abs == 1)
+    return false unless y_difference.zero? && x_difference.abs == 1
     return false unless horizontal_obstruction?(destination_x, x_difference, y_difference)
     false
   end

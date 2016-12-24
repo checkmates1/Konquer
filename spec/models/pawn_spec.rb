@@ -31,6 +31,5 @@ RSpec.describe Pawn, type: :model do
         expect(pawn.valid_move?(4, 3)).to eq true
       end
     end
-
   end
 end
