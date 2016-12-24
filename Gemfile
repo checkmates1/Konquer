@@ -43,9 +43,9 @@ gem 'simple_form'
 # gem 'debugger', group: [:development, :test]
 
 group :development, :test do
-  gem 'pry-byebug'
   gem 'capybara', '>=2.2.0'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.5'
 end
 
