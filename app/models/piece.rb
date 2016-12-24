@@ -17,6 +17,20 @@ class Piece < ActiveRecord::Base
     %w(Pawn Rook Knight Bishop Queen King)
   end
 
+  def move_to!(destination_x, destination_y)
+    destination = game.pieces.find_by(:x_position => destination_x, :y_position => destination_y)
+    if destination.nil?
+      piece.update_attributes(:x_position => destination_x, :y_position => destination_y)
+    else
+      if destination.color != piece.color
+        destination.update(:status => :dead)
+        piece.update_attributes(:x_position => destination_x, :y_position => destination_y)
+      else
+        return false
+      end
+    end
+  end
+
   def obstructed?(destination_x, destination_y)
     x_difference = x_position - destination_x
     y_difference = y_position - destination_y
