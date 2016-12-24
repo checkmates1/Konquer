@@ -21,11 +21,16 @@ FactoryGirl.define do
     type 'Rook'
   end
 
+<<<<<<< HEAD
   factory :knight, parent: :piece, class: 'Knight' do
     type 'Knight'
   end
 
   factory :queen, parent: :piece, class: 'Queen' do
     type 'Queen'
+=======
+  factory :pawn, parent: :piece, class: 'Pawn' do
+    type 'Pawn'
+>>>>>>> valid moves for pawn
   end
 end
