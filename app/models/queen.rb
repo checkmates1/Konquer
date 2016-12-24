@@ -1,6 +1,5 @@
 class Queen < Piece
   def valid_move?(destination_x, destination_y)
-    x_position == destination_x || y_position == destination_y || (x_position - destination_x).abs == (y_position - destination_y).abs
     x_difference = x_position - destination_x
     y_difference = y_position - destination_y
     return true if vertical_move(destination_y, x_difference, y_difference)
