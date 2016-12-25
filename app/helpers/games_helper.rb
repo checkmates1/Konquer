@@ -1,13 +1,6 @@
 module GamesHelper
   def render_piece(x, y)
-    pieces = Piece.all
-    puts pieces.size
-    pieces.each do |piece|
-      puts piece.type
-      if piece.x_position == x && piece.y_position == y
-        return "#{piece.type} #{piece.color}"
-      end
+    piece = @game.pieces.find_by(x_position: x, y_position: y)
+    return "#{piece.type} #{piece.color} " if piece
     end
-    return ""
   end
-end
