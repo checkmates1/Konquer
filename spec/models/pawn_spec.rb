@@ -24,7 +24,7 @@ RSpec.describe Pawn, type: :model do
     context 'when not valid destination' do
       it { expect(pawn.valid_move?(9, 0)).to eq false }
     end
-    
+
     context 'when obstructed' do
       it 'returns true' do
         FactoryGirl.create(:pawn, x_position: 4, y_position: 3, color: 'white', game: game)
