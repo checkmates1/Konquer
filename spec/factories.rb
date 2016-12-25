@@ -33,4 +33,8 @@ FactoryGirl.define do
     type 'Pawn'
 >>>>>>> valid moves for pawn
   end
+
+  factory :queen, parent: :piece, class: 'Queen' do
+    type 'Queen'
+  end
 end
