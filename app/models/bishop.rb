@@ -12,6 +12,6 @@ class Bishop < Piece
     return false unless x_difference.abs == y_difference.abs && !x_difference.zero?
     return false unless (0..7).cover?(destination_x) && (0..7).cover?(destination_y)
     return false if diagonal_obstruction?(destination_x, destination_y, x_difference, y_difference)
-    false
+    true
   end
 end
