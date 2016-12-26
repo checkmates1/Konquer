@@ -21,6 +21,10 @@ FactoryGirl.define do
     type 'Rook'
   end
 
+  factory :knight, parent: :piece, class: 'Knight' do
+    type 'Knight'
+  end
+
   factory :queen, parent: :piece, class: 'Queen' do
     type 'Queen'
   end
