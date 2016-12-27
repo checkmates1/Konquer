@@ -15,9 +15,16 @@
       <%= link_to 'Join Game', game_path(@game, game: { black_player_id: current_user.id }), method: :put %>
     <% end %>
   <% else %>
-    <p> White Player ID: <%= @game.white_player_id %> </p>
-    <p> Black Player ID: <%= @game.black_player_id %> </p>
-    <p> Game is full.</p>
+    <ul class="collection">
+      <li class="collection-item avatar">
+        <%= image_tag avatar_url(@white_player), class: "circle" %>
+        <p> White Player: <%= @white_player.username %> </p>
+      </li>
+      <li class="collection-item avatar">
+        <%= image_tag avatar_url(@black_player), class: "circle" %>
+        <p> Black Player: <%= @black_player.username %> </p>
+      </li>
+    </ul>
     <%= link_to 'Try Another Game', root_path %>
   <% end %>
 <% else %>
