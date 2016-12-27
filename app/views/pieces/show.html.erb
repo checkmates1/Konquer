@@ -1,13 +1,5 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-  jQuery('button').click(function(){
-     jQuery(this).toggleClass('active');
-  });
-</script>
-
 <h1>Join this Game!</h1>
-
 <h6><%= link_to 'Go back to open games', root_path %></h6>
-
 <h3><%= @game.name %></h3>
 
 <% if user_signed_in? %>
@@ -36,7 +28,7 @@
     <div class="spacing">
       <div class="row top">
         <div class="black left"><%= link_to render_piece(0,7), piece_path(@game, @piece) %></div>
-        <div class="white left"><%= link_to render_piece(1,7), piece_path(@game, @piece) %></div>
+        <div class="white left"><%= link_to render_piece(1,7), piece_path %></div>
         <div class="black left"><%= link_to render_piece(2,7), piece_path %></div>
         <div class="white left"><%= link_to render_piece(3,7), piece_path %></div>
         <div class="black left"><%= link_to render_piece(4,7), piece_path %></div>
@@ -123,5 +115,3 @@
     </div>
   </div>
 </div>
-
-
