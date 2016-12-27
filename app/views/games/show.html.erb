@@ -1,8 +1,4 @@
-<h1>Join this Game!</h1>
-
-<h6><%= link_to 'Go back to open games', root_path %></h6>
-
-<h3><%= @game.name %></h3>
+<h1>Game: <%= @game.id %></h1>
 
 <% if user_signed_in? %>
   <% if @game.white_player_id == nil %>
@@ -11,21 +7,17 @@
     <% if @game.white_player_id == current_user.id %>
       <p> Waiting for one more player </p>
     <% else %>
-      <p> Only one more player needed! </p>
-      <%= link_to 'Join Game', game_path(@game, game: { black_player_id: current_user.id }), method: :put %>
+      <ul class="collection">
+        <%= render "games/player_detail", player: @white_player, color: "White" %>
+        <li class="collection-item valign-wrapper">
+          <%= link_to 'Join Game', game_path(@game, game: { black_player_id: current_user.id }), class: 'btn btn-flat waves-effect', method: :put %>
+        </li>
+      </ul>
     <% end %>
   <% else %>
     <ul class="collection">
-      <li class="collection-item avatar">
-        <%= image_tag avatar_url(@white_player), class: "circle" %>
-        <p> White Player: <%= @white_player.username %> </p>
-        <p>Record: <%= "#{@white_player.wins} - #{@white_player.losses}" %></p>
-      </li>
-      <li class="collection-item avatar">
-        <%= image_tag avatar_url(@black_player), class: "circle" %>
-        <p> Black Player: <%= @black_player.username %> </p>
-        <p>Record: <%= "#{@black_player.wins} - #{@black_player.losses}" %></p>
-      </li>
+      <%= render "games/player_detail", player: @white_player, color: "White" %>
+      <%= render "games/player_detail", player: @black_player, color: "Black" %>
     </ul>
     <%= link_to 'Try Another Game', root_path %>
   <% end %>
@@ -34,6 +26,9 @@
   <br  />
   <%= link_to 'Sign Up To Join', new_user_registration_path %>
 <% end %>
+
+<h6><%= link_to 'Go back to open games', root_path %></h6>
+
 <div class="grass valign-wrapper green lighten-3">
   <div class="card-panel frame">
     <div class="spacing">
