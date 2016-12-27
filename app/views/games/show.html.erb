@@ -19,10 +19,12 @@
       <li class="collection-item avatar">
         <%= image_tag avatar_url(@white_player), class: "circle" %>
         <p> White Player: <%= @white_player.username %> </p>
+        <p>Record: <%= "#{@white_player.wins} - #{@white_player.losses}" %></p>
       </li>
       <li class="collection-item avatar">
         <%= image_tag avatar_url(@black_player), class: "circle" %>
         <p> Black Player: <%= @black_player.username %> </p>
+        <p>Record: <%= "#{@black_player.wins} - #{@black_player.losses}" %></p>
       </li>
     </ul>
     <%= link_to 'Try Another Game', root_path %>
