@@ -12,8 +12,8 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @white_player = User.find_by_id(@game.white_player_id) unless !@game.white_player_id
-    @black_player = User.find_by_id(@game.black_player_id) unless !@game.black_player_id
+    @white_player = User.find_by(id: @game.white_player_id) if @game.white_player_id
+    @black_player = User.find_by(id: @game.black_player_id) if @game.black_player_id
   end
 
   def update
