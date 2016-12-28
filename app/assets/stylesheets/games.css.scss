@@ -46,6 +46,11 @@ div.frame{
       padding: 20px;
       margin-left: 10px;
     }
+  a:hover,
+  a.selected {
+    color: red;
+    background: #efefef;
+  }
 
 
 

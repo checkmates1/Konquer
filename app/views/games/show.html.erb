@@ -35,8 +35,8 @@
   <div class="card-panel frame">
     <div class="spacing">
       <div class="row top">
-        <div class="black left"><%= link_to render_piece(0,7), piece_path(@game, @piece) %></div>
-        <div class="white left"><%= link_to render_piece(1,7), piece_path(@game, @piece) %></div>
+        <div class="black left selected"><%= link_to render_piece(0,7), piece_path %></div>
+        <div class="white left"><%= link_to render_piece(1,7), piece_path %></div>
         <div class="black left"><%= link_to render_piece(2,7), piece_path %></div>
         <div class="white left"><%= link_to render_piece(3,7), piece_path %></div>
         <div class="black left"><%= link_to render_piece(4,7), piece_path %></div>
@@ -123,5 +123,3 @@
     </div>
   </div>
 </div>
-
-
