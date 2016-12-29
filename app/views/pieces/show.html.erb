@@ -1,5 +1,7 @@
 <h1>Join this Game!</h1>
+
 <h6><%= link_to 'Go back to open games', root_path %></h6>
+
 <h3><%= @game.name %></h3>
 
 <% if user_signed_in? %>
@@ -27,90 +29,90 @@
   <div class="card-panel frame">
     <div class="spacing">
       <div class="row top">
-        <div class="black left"><%= link_to render_piece(0,7), piece_path(@game, @piece) %></div>
-        <div class="white left"><%= link_to render_piece(1,7), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(2,7), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(3,7), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(4,7), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(5,7), piece_path %></div>`
-        <div class="black left"><%= link_to render_piece(6,7), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(7,7), piece_path %></div>
+        <div class="black left " + <%= render_piece_selected(0,7) %>><%= render_piece(0,7) %></div>
+        <div class="white left"><%= render_piece(1,7) %></div>
+        <div class="black left"><%= render_piece(2,7) %></div>
+        <div class="white left"><%= render_piece(3,7) %></div>
+        <div class="black left"><%= render_piece(4,7) %></div>
+        <div class="white left"><%= render_piece(5,7) %></div>`
+        <div class="black left"><%= render_piece(6,7) %></div>
+        <div class="white left"><%= render_piece(7,7) %></div>
       </div>
 
       <div class="row">
-        <div class="white left"><%= link_to render_piece(0,6), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(1,6), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(2,6), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(3,6), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(4,6), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(5,6), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(6,6), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(7,6), piece_path %></div>
+        <div class="white left"><%= render_piece(0,6) %></div>
+        <div class="black left"><%= render_piece(1,6) %></div>
+        <div class="white left"><%= render_piece(2,6) %></div>
+        <div class="black left"><%= render_piece(3,6) %></div>
+        <div class="white left"><%= render_piece(4,6) %></div>
+        <div class="black left"><%= render_piece(5,6) %></div>
+        <div class="white left"><%= render_piece(6,6) %></div>
+        <div class="black left"><%= render_piece(7,6) %></div>
       </div>
 
       <div class="row">
-        <div class="black left"><%= link_to render_piece(0,5), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(1,5), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(2,5), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(3,5), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(4,5), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(5,5), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(6,5), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(7,5), piece_path %></div>
+        <div class="black left"><%= render_piece(0,5) %></div>
+        <div class="white left"><%= render_piece(1,5) %></div>
+        <div class="black left"><%= render_piece(2,5) %></div>
+        <div class="white left"><%= render_piece(3,5) %></div>
+        <div class="black left"><%= render_piece(4,5) %></div>
+        <div class="white left"><%= render_piece(5,5) %></div>
+        <div class="black left"><%= render_piece(6,5) %></div>
+        <div class="white left"><%= render_piece(7,5) %></div>
       </div>
 
       <div class="row">
-        <div class="white left"><%= link_to render_piece(0,4), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(1,4), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(2,4), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(3,4), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(4,4), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(5,4), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(6,4), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(7,4), piece_path %></div>
+        <div class="white left"><%= render_piece(0,4) %></div>
+        <div class="black left"><%= render_piece(1,4) %></div>
+        <div class="white left"><%= render_piece(2,4) %></div>
+        <div class="black left"><%= render_piece(3,4) %></div>
+        <div class="white left"><%= render_piece(4,4) %></div>
+        <div class="black left"><%= render_piece(5,4) %></div>
+        <div class="white left"><%= render_piece(6,4) %></div>
+        <div class="black left"><%= render_piece(7,4) %></div>
       </div>
 
       <div class="row">
-        <div class="black left"><%= link_to render_piece(0,3), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(1,3), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(2,3), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(3,3), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(4,3), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(5,3), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(6,3), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(7,3), piece_path %></div>
+        <div class="black left"><%= render_piece(0,3) %></div>
+        <div class="white left"><%= render_piece(1,3) %></div>
+        <div class="black left"><%= render_piece(2,3) %></div>
+        <div class="white left"><%= render_piece(3,3) %></div>
+        <div class="black left"><%= render_piece(4,3) %></div>
+        <div class="white left"><%= render_piece(5,3) %></div>
+        <div class="black left"><%= render_piece(6,3) %></div>
+        <div class="white left"><%= render_piece(7,3) %></div>
       </div>
 
       <div class="row">
-        <div class="white left"><%= link_to render_piece(0,2), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(1,2), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(2,2), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(3,2), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(4,2), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(5,2), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(6,2), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(7,2), piece_path %></div>
+        <div class="white left"><%= render_piece(0,2) %></div>
+        <div class="black left"><%= render_piece(1,2) %></div>
+        <div class="white left"><%= render_piece(2,2) %></div>
+        <div class="black left"><%= render_piece(3,2) %></div>
+        <div class="white left"><%= render_piece(4,2) %></div>
+        <div class="black left"><%= render_piece(5,2) %></div>
+        <div class="white left"><%= render_piece(6,2) %></div>
+        <div class="black left"><%= render_piece(7,2) %></div>
       </div>
       <div class="row">
-        <div class="black left"><%= link_to render_piece(0,1), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(1,1), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(2,1), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(3,1), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(4,1), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(5,1), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(6,1), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(7,1), piece_path %></div>
+        <div class="black left"><%= render_piece(0,1) %></div>
+        <div class="white left"><%= render_piece(1,1) %></div>
+        <div class="black left"><%= render_piece(2,1) %></div>
+        <div class="white left"><%= render_piece(3,1) %></div>
+        <div class="black left"><%= render_piece(4,1) %></div>
+        <div class="white left"><%= render_piece(5,1) %></div>
+        <div class="black left"><%= render_piece(6,1) %></div>
+        <div class="white left"><%= render_piece(7,1) %></div>
       </div>
 
       <div class="row bottom">
-        <div class="white left"><%= link_to render_piece(0,0), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(1,0), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(2,0), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(3,0), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(4,0), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(5,0), piece_path %></div>
-        <div class="white left"><%= link_to render_piece(6,0), piece_path %></div>
-        <div class="black left"><%= link_to render_piece(7,0), piece_path %></div>
+        <div class="white left"><%= render_piece(0,0) %></div>
+        <div class="black left"><%= render_piece(1,0) %></div>
+        <div class="white left"><%= render_piece(2,0) %></div>
+        <div class="black left"><%= render_piece(3,0) %></div>
+        <div class="white left"><%= render_piece(4,0) %></div>
+        <div class="black left"><%= render_piece(5,0) %></div>
+        <div class="white left"><%= render_piece(6,0) %></div>
+        <div class="black left"><%= render_piece(7,0) %></div>
       </div>
     </div>
   </div>
