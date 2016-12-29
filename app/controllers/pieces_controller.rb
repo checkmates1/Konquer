@@ -1,24 +1,34 @@
 class PiecesController < ApplicationController
+  
   def show
-    @piece = Piece.find(piece_params)
+    @pieces = current_game.pieces.order(:y_position).order(:x_position).to_a
+  end
+
+  # def show
+  #   @piece = Piece.find(piece_params)
 #not functional code just thinking through the process
     #   first_selected_piece = @piece
     #   first_selected_piece.update_attributes(x, y)
     # end
     # @piece.update_attributes.update_attributes(x, y)
-  end
+  # end
 
   def update
-    @piece = Piece.find(params:id)
-    x = params[:x_position]
-    y = params[:y_position]
     redirect_to game_path
   end
 
   private
 
   def piece_params
-    params.require(:piece).permit(:show, :x_position, :y_position, :game_id)
+    params.require(:piece).permit(:game_id, :y_position, :x_position)
+  end
+
+  def current_game
+    @game ||= selected_piece.game
+  end
+
+  def selected_piece
+    @selected_piece ||= Piece.find(params[:id])
   end
 
 end

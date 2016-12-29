@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'play#index'
-  resources :games, only: [:new, :create, :show, :update] do
-    resources :pieces, only: [:show]
-  end
+  resources :games, only: [:new, :create, :show, :update]
+  resources :pieces, only: [:show, :update]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

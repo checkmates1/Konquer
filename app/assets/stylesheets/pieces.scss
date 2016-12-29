@@ -11,3 +11,8 @@ a:hover,
 .active {
   color: yellow;
 }
+
+.selected .div.row div {
+  border: 1px solid green;
+}
+

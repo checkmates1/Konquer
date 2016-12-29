@@ -11,11 +11,11 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
+    @game = current_game
   end
 
   def update
-    @game = Game.find(params[:id])
+    @game = current_game
     @game.update_attributes(game_attributes)
     redirect_to game_path(@game)
   end
@@ -28,5 +28,9 @@ class GamesController < ApplicationController
 
   def game_attributes
     params.require(:game).permit(:white_player_id, :black_player_id)
+  end
+
+  def current_game
+    @game ||= Game.find(params[:id])
   end
 end
