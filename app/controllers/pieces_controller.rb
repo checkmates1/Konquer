@@ -1,7 +1,8 @@
 class PiecesController < ApplicationController
   
   def show
-    @pieces = current_game.pieces.order(:y_position).order(:x_position).to_a
+    @piece = Piece.find(params[:id])
+    @game = @piece.game
   end
 
   # def show
@@ -14,17 +15,15 @@ class PiecesController < ApplicationController
   # end
 
   def update
+    @piece = Piece.find(params[:id])
+    x = params[:x_position]
+    y = params[:y_position]
     redirect_to game_path
   end
 
   private
-  
-  def current_game
-    @game ||= selected_piece.game
-  end
 
-  def selected_piece
-    @selected_piece ||= Piece.find(params[:id])
+  def piece_params
+    params.require(:piece).permit(:x_position, :y_position)
   end
-
 end
