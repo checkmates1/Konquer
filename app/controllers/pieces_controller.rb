@@ -18,11 +18,7 @@ class PiecesController < ApplicationController
   end
 
   private
-
-  def piece_params
-    params.require(:piece).permit(:game_id, :y_position, :x_position)
-  end
-
+  
   def current_game
     @game ||= selected_piece.game
   end

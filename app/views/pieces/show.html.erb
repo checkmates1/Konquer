@@ -28,94 +28,92 @@
 <div class="grass valign-wrapper green lighten-3">
   <div class="card-panel frame">
     <div class="spacing">
-      <div class="row bottom">
-        <div class="white left"><%= draw_square_background(0,0) %></div>
-        <div class="black left"><%= draw_square_background(1,0) %></div>
-        <div class="white left"><%= draw_square_background(2,0) %></div>
-        <div class="black left"><%= draw_square_background(3,0) %></div>
-        <div class="white left"><%= draw_square_background(4,0) %></div>
-        <div class="black left"><%= draw_square_background(5,0) %></div>
-        <div class="white left"><%= draw_square_background(6,0) %></div>
-        <div class="black left"><%= draw_square_background(7,0) %></div>
-      </div>
-
-      <div class="row">
-        <div class="black left"><%= draw_square_background(0,1) %></div>
-        <div class="white left"><%= draw_square_background(1,1) %></div>
-        <div class="black left"><%= draw_square_background(2,1) %></div>
-        <div class="white left"><%= draw_square_background(3,1) %></div>
-        <div class="black left"><%= draw_square_background(4,1) %></div>
-        <div class="white left"><%= draw_square_background(5,1) %></div>
-        <div class="black left"><%= draw_square_background(6,1) %></div>
-        <div class="white left"><%= draw_square_background(7,1) %></div>
-      </div>
-
-      <div class="row">
-        <div class="white left"><%= draw_square_background(0,2) %></div>
-        <div class="black left"><%= draw_square_background(1,2) %></div>
-        <div class="white left"><%= draw_square_background(2,2) %></div>
-        <div class="black left"><%= draw_square_background(3,2) %></div>
-        <div class="white left"><%= draw_square_background(4,2) %></div>
-        <div class="black left"><%= draw_square_background(5,2) %></div>
-        <div class="white left"><%= draw_square_background(6,2) %></div>
-        <div class="black left"><%= draw_square_background(7,2) %></div>
-      </div>
-
-      <div class="row">
-        <div class="black left"><%= draw_square_background(0,3) %></div>
-        <div class="white left"><%= draw_square_background(1,3) %></div>
-        <div class="black left"><%= draw_square_background(2,3) %></div>
-        <div class="white left"><%= draw_square_background(3,3) %></div>
-        <div class="black left"><%= draw_square_background(4,3) %></div>
-        <div class="white left"><%= draw_square_background(5,3) %></div>
-        <div class="black left"><%= draw_square_background(6,3) %></div>
-        <div class="white left"><%= draw_square_background(7,3) %></div>
-      </div>
-
-      <div class="row">
-        <div class="white left"><%= draw_square_background(0,4) %></div>
-        <div class="black left"><%= draw_square_background(1,4) %></div>
-        <div class="white left"><%= draw_square_background(2,4) %></div>
-        <div class="black left"><%= draw_square_background(3,4) %></div>
-        <div class="white left"><%= draw_square_background(4,4) %></div>
-        <div class="black left"><%= draw_square_background(5,4) %></div>
-        <div class="white left"><%= draw_square_background(6,4) %></div>
-        <div class="black left"><%= draw_square_background(7,4) %></div>
-      </div>
-
-      <div class="row">
-        <div class="black left"><%= draw_square_background(0,5) %></div>
-        <div class="white left"><%= draw_square_background(1,5) %></div>
-        <div class="black left"><%= draw_square_background(2,5) %></div>
-        <div class="white left"><%= draw_square_background(3,5) %></div>
-        <div class="black left"><%= draw_square_background(4,5) %></div>
-        <div class="white left"><%= draw_square_background(5,5) %></div>
-        <div class="black left"><%= draw_square_background(6,5) %></div>
-        <div class="white left"><%= draw_square_background(7,5) %></div>
-      </div>
-
-      <div class="row">
-        <div class="white left"><%= draw_square_background(0,6) %></div>
-        <div class="black left"><%= draw_square_background(1,6) %></div>
-        <div class="white left"><%= draw_square_background(2,6) %></div>
-        <div class="black left"><%= draw_square_background(3,6) %></div>
-        <div class="white left"><%= draw_square_background(4,6) %></div>
-        <div class="black left"><%= draw_square_background(5,6) %></div>
-        <div class="white left"><%= draw_square_background(6,6) %></div>
-        <div class="black left"><%= draw_square_background(7,6) %></div>
-      </div>
-
       <div class="row top">
-        <div class="black left"><%= draw_square_background(0,7) %></div>
-        <div class="white left"><%= draw_square_background(1,7) %></div>
-        <div class="black left"><%= draw_square_background(2,7) %></div>
-        <div class="white left"><%= draw_square_background(3,7) %></div>
-        <div class="black left"><%= draw_square_background(4,7) %></div>
-        <div class="white left"><%= draw_square_background(5,7) %></div>`
-        <div class="black left"><%= draw_square_background(6,7) %></div>
-        <div class="white left"><%= draw_square_background(7,7) %></div>
+        <div class="black left"><%= render_piece_selected(0,7) %></div>
+        <div class="white left"><%= render_piece_selected(1,7) %></div>
+        <div class="black left"><%= render_piece_selected(2,7) %></div>
+        <div class="white left"><%= render_piece_selected(3,7) %></div>
+        <div class="black left"><%= render_piece_selected(4,7) %></div>
+        <div class="white left"><%= render_piece_selected(5,7) %></div>`
+        <div class="black left"><%= render_piece_selected(6,7) %></div>
+        <div class="white left"><%= render_piece_selected(7,7) %></div>
       </div>
 
+      <div class="row">
+        <div class="white left"><%= render_piece_selected(0,6) %></div>
+        <div class="black left"><%= render_piece_selected(1,6) %></div>
+        <div class="white left"><%= render_piece_selected(2,6) %></div>
+        <div class="black left"><%= render_piece_selected(3,6) %></div>
+        <div class="white left"><%= render_piece_selected(4,6) %></div>
+        <div class="black left"><%= render_piece_selected(5,6) %></div>
+        <div class="white left"><%= render_piece_selected(6,6) %></div>
+        <div class="black left"><%= render_piece_selected(7,6) %></div>
+      </div>
+
+      <div class="row">
+        <div class="black left"><%= render_piece_selected(0,5) %></div>
+        <div class="white left"><%= render_piece_selected(1,5) %></div>
+        <div class="black left"><%= render_piece_selected(2,5) %></div>
+        <div class="white left"><%= render_piece_selected(3,5) %></div>
+        <div class="black left"><%= render_piece_selected(4,5) %></div>
+        <div class="white left"><%= render_piece_selected(5,5) %></div>
+        <div class="black left"><%= render_piece_selected(6,5) %></div>
+        <div class="white left"><%= render_piece_selected(7,5) %></div>
+      </div>
+
+      <div class="row">
+        <div class="white left"><%= render_piece_selected(0,4) %></div>
+        <div class="black left"><%= render_piece_selected(1,4) %></div>
+        <div class="white left"><%= render_piece_selected(2,4) %></div>
+        <div class="black left"><%= render_piece_selected(3,4) %></div>
+        <div class="white left"><%= render_piece_selected(4,4) %></div>
+        <div class="black left"><%= render_piece_selected(5,4) %></div>
+        <div class="white left"><%= render_piece_selected(6,4) %></div>
+        <div class="black left"><%= render_piece_selected(7,4) %></div>
+      </div>
+
+      <div class="row">
+        <div class="black left"><%= render_piece_selected(0,3) %></div>
+        <div class="white left"><%= render_piece_selected(1,3) %></div>
+        <div class="black left"><%= render_piece_selected(2,3) %></div>
+        <div class="white left"><%= render_piece_selected(3,3) %></div>
+        <div class="black left"><%= render_piece_selected(4,3) %></div>
+        <div class="white left"><%= render_piece_selected(5,3) %></div>
+        <div class="black left"><%= render_piece_selected(6,3) %></div>
+        <div class="white left"><%= render_piece_selected(7,3) %></div>
+      </div>
+
+      <div class="row">
+        <div class="white left"><%= render_piece_selected(0,2) %></div>
+        <div class="black left"><%= render_piece_selected(1,2) %></div>
+        <div class="white left"><%= render_piece_selected(2,2) %></div>
+        <div class="black left"><%= render_piece_selected(3,2) %></div>
+        <div class="white left"><%= render_piece_selected(4,2) %></div>
+        <div class="black left"><%= render_piece_selected(5,2) %></div>
+        <div class="white left"><%= render_piece_selected(6,2) %></div>
+        <div class="black left"><%= render_piece_selected(7,2) %></div>
+      </div>
+      <div class="row">
+        <div class="black left"><%= render_piece_selected(0,1) %></div>
+        <div class="white left"><%= render_piece_selected(1,1) %></div>
+        <div class="black left"><%= render_piece_selected(2,1) %></div>
+        <div class="white left"><%= render_piece_selected(3,1) %></div>
+        <div class="black left"><%= render_piece_selected(4,1) %></div>
+        <div class="white left"><%= render_piece_selected(5,1) %></div>
+        <div class="black left"><%= render_piece_selected(6,1) %></div>
+        <div class="white left"><%= render_piece_selected(7,1) %></div>
+      </div>
+
+      <div class="row bottom">
+        <div class="white left"><%= render_piece_selected(0,0) %></div>
+        <div class="black left"><%= render_piece_selected(1,0) %></div>
+        <div class="white left"><%= render_piece_selected(2,0) %></div>
+        <div class="black left"><%= render_piece_selected(3,0) %></div>
+        <div class="white left"><%= render_piece_selected(4,0) %></div>
+        <div class="black left"><%= render_piece_selected(5,0) %></div>
+        <div class="white left"><%= render_piece_selected(6,0) %></div>
+        <div class="black left"><%= render_piece_selected(7,0) %></div>
+      </div>
     </div>
   </div>
 </div>
