@@ -1,7 +1,7 @@
 class PiecesController < ApplicationController
   def show
-    @piece = Piece.find(params[:id])
-    @game = @piece.game
+    @selected_piece = Piece.find(params[:id])
+    @game = @selected_piece.game
   end
 
   # def show
