@@ -45,7 +45,7 @@ class Game < ActiveRecord::Base
     # King
     pieces.create(type: 'King', x_position: 4, y_position: 7, color: 'black')
   end
-  
+
   def check?
     king_is_in_check?('black') || king_is_in_check?('white')
   end
@@ -54,7 +54,7 @@ class Game < ActiveRecord::Base
 
   def king_is_in_check?(color)
     king = pieces.find_by(type: 'King', color: color)
-    enemy = pieces.includes(:game).where(color: !color, status: 'alive').to_a
+    enemy = remaining_pieces(switch_color(color)) # creates array of enemy pieces
 
     enemy.each do |piece|
       if piece.valid_move?(king.x_position, king.y_position)
@@ -65,7 +65,11 @@ class Game < ActiveRecord::Base
     false
   end
 
-  def enemy_pieces(color) # creates an array of the remaining enemy pieces
-      pieces.includes(:game).where(color: color, status: 'alive').to_a
+  def remaining_pieces(color) # creates an array of the remaining pieces
+    pieces.includes(:game).where(color: color, status: 'alive').to_a
+  end
+
+  def switch_color(color) # returns the opposite color
+    color == 'white' ? 'black' : 'white'
   end
 end
