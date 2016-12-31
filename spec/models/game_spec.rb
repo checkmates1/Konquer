@@ -12,11 +12,6 @@ RSpec.describe Game, type: :model do
       FactoryGirl.create(:king, x_position: 3, y_position: 0, color: 'white', game: game)
       expect(game.check?).to eq true
     end
-  end
-end
-
-RSpec.describe Game, type: :model do
-  describe '.check?' do
     let(:game) { FactoryGirl.create(:game) }
 
     it 'should return false' do
