@@ -6,6 +6,7 @@ class Game < ActiveRecord::Base
 
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
+
   def populate_board!
     #- white - 16
     # Pawn - 8
@@ -43,5 +44,28 @@ class Game < ActiveRecord::Base
     pieces.create(type: 'Queen', x_position: 3, y_position: 7, color: 'black')
     # King
     pieces.create(type: 'King', x_position: 4, y_position: 7, color: 'black')
+  end
+  
+  def check?
+    king_is_in_check?('black') || king_is_in_check?('white')
+  end
+
+  private
+
+  def king_is_in_check?(color)
+    king = pieces.find_by(type: 'King', color: color)
+    enemy = pieces.includes(:game).where(color: !color, status: 'alive').to_a
+
+    enemy.each do |piece|
+      if piece.valid_move?(king.x_position, king.y_position)
+        @piece_in_check = piece # stores piece that has king in check
+        return true
+      end
+    end
+    false
+  end
+
+  def enemy_pieces(color) # creates an array of the remaining enemy pieces
+      pieces.includes(:game).where(color: color, status: 'alive').to_a
   end
 end
