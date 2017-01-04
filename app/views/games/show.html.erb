@@ -29,7 +29,7 @@
 
 <h6><%= link_to 'Go back to open games', root_path %></h6>
 
-<%= link_to 'Forfeit', forfeit_game_path(@game) %>
+<%= link_to 'Forfeit', forfeit_game_path(@game), method: 'PUT' %>
 
 <div class="grass valign-wrapper green lighten-3">
   <div class="card-panel frame">

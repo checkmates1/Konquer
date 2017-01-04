@@ -22,4 +22,18 @@ RSpec.describe Game, type: :model do
       expect(game.check?).to eq false
     end
   end
+
+  describe '.forfeit' do
+    let(:game) { FactoryGirl.create(:game) }
+    it 'increments white_player losses by 1 if white_player forfeits' do
+    end
+    it 'increments white_player wins by 1 if black_player forfeits' do
+    end
+    it 'increments black_player losses by 1 if black_player forfeits' do
+    end
+    it 'increments black_player wins by 1 if white_player forfeits' do
+    end
+    it 'ends the game' do
+    end
+  end
 end

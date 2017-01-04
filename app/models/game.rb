@@ -36,7 +36,15 @@ class Game < ActiveRecord::Base
     kings_in_check?('white') || kings_in_check?('black')
   end
 
-  def forfeited
+  def forfeit(current_user)
+    if current_user == white_player
+      white_player.update_attributes(losses: white_player.losses + 1)
+      black_player.update_attributes(wins: black_player.wins + 1)
+    else
+      white_player.update_attributes(wins: white_player.wins + 1)
+      black_player.update_attributes(losses: black_player.losses + 1)
+    end
+    white_player_id, black_player_id = nil, nil # end the game
   end
 
   private
