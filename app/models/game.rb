@@ -36,6 +36,9 @@ class Game < ActiveRecord::Base
     kings_in_check?('white') || kings_in_check?('black')
   end
 
+  def forfeited
+  end
+
   private
 
   def remaining_pieces(color) # creates an array of the remaining pieces w/desired color
