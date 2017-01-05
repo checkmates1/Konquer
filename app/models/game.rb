@@ -64,7 +64,7 @@ class Game < ActiveRecord::Base
       friendly = remaining_pieces(color)
       friendly.each do |piece|
         if piece.valid_move?
-          checkmate = false unless kings_in_check
+          checkmate = false unless kings_in_check?
       end
     end
     return "CHECK MATE"
