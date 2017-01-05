@@ -33,7 +33,7 @@
 </script>
 
 
-<h1 class="data-game-id">Game: <%= @game.id %></h1>
+<h1 data-game-id>Game: <%= @game.id %></h1>
 
 <% if user_signed_in? %>
   <% if @game.white_player_id.nil? %>
