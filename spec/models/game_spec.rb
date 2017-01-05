@@ -29,16 +29,14 @@ RSpec.describe Game, type: :model do
     let(:game) { FactoryGirl.create(:game, white_player_id: white_player.id, black_player_id: black_player.id) }
 
     it 'increments white_player losses and black_player wins by 1 if white_player forfeits' do
-      put :forfeit, id: game
+      game.forfeit(white_player)
       expect(white_player.losses).to eq 1
       expect(black_player.wins).to eq 1
-      expect(game.forfeit).to eq true
     end
     it 'increments black_player losses and white_player wins by 1 if black_player forfeits' do
-      put :forfeit, id: game
+      game.forfeit(black_player)
       expect(black_player.losses).to eq 1
       expect(white_player.wins).to eq 1
-      expect(game.forfeit).to eq true
     end
   end
 end

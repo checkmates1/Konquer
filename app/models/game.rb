@@ -38,13 +38,13 @@ class Game < ActiveRecord::Base
 
   def forfeit(current_user)
     if current_user.id == white_player_id
-      white_player_id.update_attributes(losses: white_player.losses + 1)
-      black_player_id.update_attributes(wins: black_player.wins + 1)
+      white_player_id.update_attributes(white_player_id.losses: white_player_id.losses + 1)
+      black_player_id.update_attributes(black_player_id.wins: black_player_id.wins + 1)
     else
-      white_player_id.update_attributes(wins: white_player.wins + 1)
-      black_player_id.update_attributes(losses: black_player.losses + 1)
+      white_player_id.update_attributes(white_player_id.wins: white_player_id.wins + 1)
+      black_player_id.update_attributes(black_player_id.losses: black_player_id.losses + 1)
     end
-    white_player_id, black_player_id = nil, nil # end the game
+    white_player_id, black_player_id = nil, nil # end the game and make unavailable
   end
 
   private
