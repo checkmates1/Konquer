@@ -21,7 +21,7 @@
                   y_position: ui.game.data(y_position),
                 } }
         });
-        // Not sure if this is necessary or how to actually make it work correctly
+        // Not sure if this is necessary or how to actually make it work
         // function dropConditions(event, ui) {
         //   var dropPosition = ui.draggable.attr('x_position', 'y_position');
         //
@@ -33,8 +33,8 @@
 </script>
 
 
-<h1 data-game-id>Game: <%= @game.id %></h1>
-
+<h1>Game: <%= @game.id %></h1>
+  <div data-game-id="<%= game_path(@game) %>"</div>
 <% if user_signed_in? %>
   <% if @game.white_player_id.nil? %>
     <%= link_to 'Join Game', game_path(@game, game: { white_player_id: current_user.id }), method: :put %>
