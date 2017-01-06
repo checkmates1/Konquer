@@ -1,8 +1,9 @@
 class Game < ActiveRecord::Base
   has_many :pieces
-  belongs_to :black_player, class_name: 'User'
-  belongs_to :white_player, class_name: 'User'
-  belongs_to :active_player, class_name: 'User'
+  belongs_to :black_player
+  belongs_to :white_player
+  belongs_to :active_player
+  belongs_to :winning_player
 
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL AND winning_player_id IS NULL') }
@@ -38,22 +39,15 @@ class Game < ActiveRecord::Base
 
   def forfeit(current_user)
     if current_user == white_player
-      white_player.increment(losses, by = 1)
-      black_player.increment(wins, by = 1)
-      status = 'over'
-      winning_player_id = black_player
+      white_player.increment(:losses, by = 1)
+      black_player.increment(:wins, by = 1)
+      winning_player = black_player
     else
-      white_player.increment(wins, by = 1)
-      black_player.increment(losses, by = 1)
-      status = 'over'
-      winning_player_id = white_player
+      white_player.increment(:wins, by = 1)
+      black_player.increment(:losses, by = 1)
+      winning_player = white_player
     end
-    update(winning_player_id: winning_player_id)
-  end
-
-  def status
-    @game = Game.find(params[:id])
-    status = 'current' if @game.available
+    update!(winning_player_id: winning_player)
   end
 
   private
