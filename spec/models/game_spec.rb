@@ -26,7 +26,7 @@ RSpec.describe Game, type: :model do
   describe '.forfeit' do
     let(:white_player) { FactoryGirl.create(:user, wins: 0, losses: 0) }
     let(:black_player) { FactoryGirl.create(:user, wins: 0, losses: 0) }
-    let(:game) { FactoryGirl.create(:game, white_player_id: white_player.id, black_player_id: black_player.id) }
+    let(:game) { FactoryGirl.create(:game, white_player_id: white_player, black_player_id: black_player) }
 
     it 'increments white_player losses and black_player wins by 1 if white_player forfeits' do
       game.forfeit(white_player)

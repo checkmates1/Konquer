@@ -1,11 +1,11 @@
 class Game < ActiveRecord::Base
   has_many :pieces
-  belongs_to :black_player
-  belongs_to :white_player
-  belongs_to :active_player
+  belongs_to :black_player, class_name: 'User'
+  belongs_to :white_player, class_name: 'User'
+  belongs_to :active_player, class_name: 'User'
 
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
-  scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
+  scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL AND winning_player_id IS NULL') }
 
   def populate_board!
     (0..7).each do |i|
@@ -37,14 +37,23 @@ class Game < ActiveRecord::Base
   end
 
   def forfeit(current_user)
-    if current_user.id == white_player_id
-      white_player_id.update_attributes(white_player_id.losses: white_player_id.losses + 1)
-      black_player_id.update_attributes(black_player_id.wins: black_player_id.wins + 1)
+    if current_user == white_player
+      white_player.increment(losses, by = 1)
+      black_player.increment(wins, by = 1)
+      status = 'over'
+      winning_player_id = black_player
     else
-      white_player_id.update_attributes(white_player_id.wins: white_player_id.wins + 1)
-      black_player_id.update_attributes(black_player_id.losses: black_player_id.losses + 1)
+      white_player.increment(wins, by = 1)
+      black_player.increment(losses, by = 1)
+      status = 'over'
+      winning_player_id = white_player
     end
-    white_player_id, black_player_id = nil, nil # end the game and make unavailable
+    update(winning_player_id: winning_player_id)
+  end
+
+  def status
+    @game = Game.find(params[:id])
+    status = 'current' if @game.available
   end
 
   private
