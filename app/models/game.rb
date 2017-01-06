@@ -36,7 +36,28 @@ class Game < ActiveRecord::Base
     kings_in_check?('white') || kings_in_check?('black')
   end
 
+  def stalemate?
+    # get king
+    color = active_player_id == white_player_id ? 'white' : 'black'
+    king = pieces.find_by(type: 'King', color: color)
+
+    # check moves
+    return false if kings_in_check?(king)
+    return false if king_has_valid_move?(king)
+  end
+
   private
+
+  def king_has_valid_move?(king)
+    (-1..1).each do |x|
+      (-1..1).each do |y|
+        return false if x.zero? && y.zero?
+        destination_x = x_position + x
+        destination_y = y_position + y
+        king.valid_move?(destination_x, destination_y)
+      end
+    end
+  end
 
   def remaining_pieces(color) # creates an array of the remaining pieces w/desired color
     pieces.includes(:game).where('color = ? and status = 1', color == 'white' ? 0 : 1).to_a
