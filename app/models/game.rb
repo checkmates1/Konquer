@@ -1,8 +1,8 @@
 class Game < ActiveRecord::Base
   has_many :pieces
-  belongs_to :black_player
-  belongs_to :white_player
-  belongs_to :active_player
+  belongs_to :black_player, class_name: 'User'
+  belongs_to :white_player, class_name: 'User'
+  belongs_to :active_player, class_name: 'User'
 
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
