@@ -1,8 +1,9 @@
 class King < Piece
   def valid_move?(destination_x, destination_y)
-    x_difference = x_position - desination_x
-    y_difference = y_position - desination_y
-    return true if vertical_move(destination_x, destination_y, x_difference, y_difference)
+
+    x_difference = x_position - destination_x
+    y_difference = y_position - destination_y
+    return true if vertical_move(destination_y, x_difference, y_difference)
     return true if horizontal_move(destination_x, x_difference, y_difference)
     return true if diagonal_move(destination_x, destination_y, x_difference, y_difference)
     false

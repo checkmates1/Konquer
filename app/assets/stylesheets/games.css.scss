@@ -40,8 +40,16 @@ div.frame{
     width: 4em;
     height: 4em;
     margin-bottom: -20px;
-    }div.spacing {
+    color: black;
+    font-size:14px
+    }
+    div.spacing {
       padding: 20px;
       margin-left: 10px;
     }
+  a:hover,
+  a.active {
+    color: red;
+    background: #efefef;
+  }
 }
