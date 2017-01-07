@@ -18,18 +18,10 @@ class Piece < ActiveRecord::Base
   end
 
   def move_to!(destination_x, destination_y)
-    return false unless self.valid_move?(destination_x, destination_y)
     destination = game.pieces.find_by(x_position: destination_x, y_position: destination_y)
-    if destination.nil?
-      self.update_attributes(x_position: destination_x, y_position: destination_y)
-    else
-      if destination.color != self.color
-        destination.update_attributes(x_position: nil, y_position: nil, status: :dead)
-        self.update_attributes(x_position: destination_x, y_position: destination_y)
-      else
-        return false
-      end
-    end
+    return unless valid_move?(destination_x, destination_y)
+    return move_position(destination_x, destination_y) if destination.nil?
+    return capture_piece(destination, destination_x, destination_y) if destination.color == color
   end
 
   def obstructed?(destination_x, destination_y)
@@ -42,6 +34,15 @@ class Piece < ActiveRecord::Base
   end
 
   protected
+
+  def move_position(destination_x, destination_y)
+    update_attributes(x_position: destination_x, y_position: destination_y)
+  end
+
+  def capture_position(destination, destination_x, destination_y)
+    destination.update_attributes(x_position: nil, y_position: nil, status: :dead)
+    update_attributes(x_position: destination_x, y_position: destination_y)
+  end
 
   def diagonal_obstruction?(destination_x, destination_y, x_difference, y_difference)
     return false unless x_difference.abs == y_difference.abs && x_difference != 0
