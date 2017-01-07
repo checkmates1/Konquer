@@ -3,10 +3,8 @@ class Game < ActiveRecord::Base
   belongs_to :black_player, class_name: 'User'
   belongs_to :white_player, class_name: 'User'
   belongs_to :active_player, class_name: 'User'
-<<<<<<< HEAD
   belongs_to :winning_player, class_name: 'User'
-=======
->>>>>>> f262321fccfa31728f4659c2fdd4475325bdc7a5
+
 
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL AND winning_player_id IS NULL') }

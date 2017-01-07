@@ -25,7 +25,7 @@ class GamesController < ApplicationController
   def forfeit
     @game = current_game
     @game.forfeit(current_user)
-    redirect_to game_path, alert: "You have forfeited."
+    redirect_to game_path, alert: 'You have forfeited.'
   end
 
   private
