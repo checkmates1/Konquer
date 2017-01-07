@@ -39,12 +39,12 @@ class Game < ActiveRecord::Base
 
   def forfeit(current_user)
     if current_user == white_player
-      white_player.increment(:losses, by = 1)
-      black_player.increment(:wins, by = 1)
+      white_player.increment(:losses)
+      black_player.increment(:wins)
       winning_player = black_player
     else
-      white_player.increment(:wins, by = 1)
-      black_player.increment(:losses, by = 1)
+      white_player.increment(:wins)
+      black_player.increment(:losses)
       winning_player = white_player
     end
     update!(winning_player_id: winning_player)
