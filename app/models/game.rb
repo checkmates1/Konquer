@@ -1,9 +1,9 @@
 class Game < ActiveRecord::Base
   has_many :pieces
-  belongs_to :black_player
-  belongs_to :white_player
+  belongs_to :black_player, class_name: 'User'
+  belongs_to :white_player, class_name: 'User'
   belongs_to :active_player
-  belongs_to :winning_player
+  belongs_to :winning_player, class_name: 'User'
 
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL AND winning_player_id IS NULL') }
@@ -47,7 +47,7 @@ class Game < ActiveRecord::Base
       black_player.increment(:losses, by = 1)
       winning_player = white_player
     end
-    update!(winning_player_id: winning_player)
+    update!(winning_player: winning_player)
   end
 
   private
