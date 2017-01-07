@@ -33,7 +33,7 @@ RSpec.describe King, type: :model do
     context 'when destination is in check' do
       it 'returns false' do
         FactoryGirl.create(:queen, x_position: 0, y_position: 0, game: game, color: 'black')
-        expect(king.valid_move?(3,0)).to eq false
+        expect(king.valid_move?(3, 0)).to eq false
       end
     end
   end
