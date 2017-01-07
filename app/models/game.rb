@@ -5,7 +5,6 @@ class Game < ActiveRecord::Base
   belongs_to :active_player, class_name: 'User'
   belongs_to :winning_player, class_name: 'User'
 
-
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL AND winning_player_id IS NULL') }
 
