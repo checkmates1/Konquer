@@ -28,6 +28,9 @@
 <% end %>
 
 <h6><%= link_to 'Go back to open games', root_path %></h6>
+<% if @game.white_player_id && @game.black_player_id %>
+  <%= link_to 'Forfeit', forfeit_game_path(@game), method: :put %>
+<% end %>
 
 <div class="grass valign-wrapper green lighten-3">
   <div class="card-panel frame">
