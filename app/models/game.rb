@@ -33,7 +33,20 @@ class Game < ActiveRecord::Base
   end
 
   def check?
-    kings_in_check?('white') || kings_in_check?('black')
+    white_king = pieces.find_by(type: 'King', color: 'white')
+    black_king = pieces.find_by(type: 'King', color: 'black')
+    king_in_check?(white_king) || king_in_check?(black_king)
+  end
+
+  def king_in_check?(king, x = king.x_position, y = king.y_position)
+    enemy_pieces = remaining_pieces(opposite_color(king.color)) # creates array of enemy pieces
+    enemy_pieces.each do |piece|
+      if piece.valid_move?(x, y)
+        @piece_in_check = piece # stores piece that has king in check
+        return true
+      end
+    end
+    false
   end
 
   private
@@ -44,17 +57,5 @@ class Game < ActiveRecord::Base
 
   def opposite_color(color) # returns the opposite color
     color == 'white' ? 'black' : 'white'
-  end
-
-  def kings_in_check?(color)
-    king = pieces.find_by(type: 'King', color: color)
-    enemy = remaining_pieces(opposite_color(color)) # creates array of enemy pieces
-    enemy.each do |piece|
-      if piece.valid_move?(king.x_position, king.y_position)
-        @piece_in_check = piece # stores piece that has king in check
-        return true
-      end
-    end
-    false
   end
 end
