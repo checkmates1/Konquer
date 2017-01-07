@@ -11,6 +11,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    redirect_to root_path unless user_signed_in?
     @game = Game.find(params[:id])
     @white_player = User.find_by(id: @game.white_player_id) if @game.white_player_id
     @black_player = User.find_by(id: @game.black_player_id) if @game.black_player_id
