@@ -23,7 +23,6 @@ RSpec.describe Game, type: :model do
     end
   end
 
-
   describe '.check_mate?' do
     let(:game) { FactoryGirl.create(:game) }
 
@@ -42,7 +41,4 @@ RSpec.describe Game, type: :model do
       expect(game.check_mate?).to eq true
     end
   end
-
-
-
 end

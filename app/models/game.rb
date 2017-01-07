@@ -58,12 +58,10 @@ class Game < ActiveRecord::Base
     false
   end
 
-
-
   def check_mate?
     checkmate = true
     friendly = remaining_pieces(color)
-    friendly.each do |piece|
+    friendly.each do |_piece|
       if all_possible_moves.piece
         checkmate = false unless kings_in_check?
         end
@@ -75,11 +73,12 @@ class Game < ActiveRecord::Base
     end
   end
 
+
   def all.moves(piece)
     all_possible_moves = []
     piece.each do |move|
       all_possible_moves[move] = piece.move
     end
     all_possible_moves
-  end 
+  end
 end
