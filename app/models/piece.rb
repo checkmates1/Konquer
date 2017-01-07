@@ -18,13 +18,14 @@ class Piece < ActiveRecord::Base
   end
 
   def move_to!(destination_x, destination_y)
-    destination = game.pieces.find_by(:x_position => destination_x, :y_position => destination_y)
+    return false unless self.valid_move?(destination_x, destination_y)
+    destination = game.pieces.find_by(x_position: destination_x, y_position: destination_y)
     if destination.nil?
-      piece.update_attributes(:x_position => destination_x, :y_position => destination_y)
+      self.update_attributes(x_position: destination_x, y_position: destination_y)
     else
-      if destination.color != piece.color
-        destination.update(:status => :dead)
-        piece.update_attributes(:x_position => destination_x, :y_position => destination_y)
+      if destination.color != self.color
+        destination.update_attributes(x_position: nil, y_position: nil, status: :dead)
+        self.update_attributes(x_position: destination_x, y_position: destination_y)
       else
         return false
       end

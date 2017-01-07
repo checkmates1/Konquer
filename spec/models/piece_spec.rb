@@ -126,3 +126,39 @@ RSpec.describe Piece, type: :model do
     end
   end
 end
+
+RSpec.describe Piece, type: :model do
+  describe 'move_to! method with validation' do
+    let(:user1) { FactoryGirl.create(:user) }
+    let(:user2) { FactoryGirl.create(:user) }
+    let(:game) { FactoryGirl.create(:game, white_player_id: user1.id, black_player_id: user2.id) }
+    let(:pawn1) { FactoryGirl.create(:pawn, x_position: 0, y_position: 1, color: 'white', game: game) }
+    let(:pawn2) { FactoryGirl.create(:pawn, x_position: 1, y_position: 2, color: 'black', game: game) }
+    let(:queen) { FactoryGirl.create(:queen, x_position: 1, y_position: 1, color: 'white', game: game) }
+    context 'should update piece position' do
+      it 'when valid move' do
+        login_as(user1, scope: :user)
+        pawn1.move_to!(0,3)
+        expect(pawn1.y_position).to eq 3
+      end
+    end
+    context 'should update piece position and capture' do
+      it 'when valid move to enemy position' do
+        login_as(user2, scope: :user)
+        pawn2.move_to!(1,1)
+        expect(game.pieces.find_by(x_position: 1, y_position: 1).type).to eq "Pawn"
+      end
+    end
+    context 'should not update piece position' do
+      it 'when invalid move' do
+        login_as(user1, scope: :user)
+        pawn1.move_to!(0,5)
+        pawn2.move_to!(1,3)
+        queen.move_to!(-1,1000)
+        expect(pawn1.y_position).to eq 1
+        expect(pawn2.y_position).to eq 2
+        expect(queen.y_position).to eq 1
+      end
+    end
+  end
+end
