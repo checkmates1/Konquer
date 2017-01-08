@@ -38,42 +38,43 @@ class Game < ActiveRecord::Base
     king_in_check?(white_king) || king_in_check?(black_king)
   end
 
+  def stalemate?
+    # get king
+    color = active_player == white_player ? 0 : 1
+    king = pieces.find_by(type: 'King', color: color)
+
+    # check moves
+    return false if king_in_check?(king)
+    return true unless king_has_valid_move?(king)
+    false
+  end
+
   def king_in_check?(king, x = king.x_position, y = king.y_position)
     enemy_pieces = remaining_pieces(opposite_color(king.color)) # creates array of enemy pieces
     enemy_pieces.each do |piece|
-      if piece.valid_move?(x, y)
-        @piece_in_check = piece # stores piece that has king in check
-        return true
-      end
+      # binding.pry
+      return true if piece.valid_move?(x, y)
     end
     false
   end
 
-  def stalemate?
-    # get king
-    color = active_player_id == white_player_id ? 'white' : 'black'
-    king = pieces.find_by(type: 'King', color: color)
 
-    # check moves
-    return false if kings_in_check?(king)
-    return false if king_has_valid_move?(king)
-  end
 
   private
 
   def king_has_valid_move?(king)
     (-1..1).each do |x|
+      destination_x = king.x_position + x
       (-1..1).each do |y|
-        return false if x.zero? && y.zero?
-        destination_x = x_position + x
-        destination_y = y_position + y
-        king.valid_move?(destination_x, destination_y)
+        destination_y = king.y_position + y
+        return true if king.valid_move?(destination_x, destination_y)
       end
     end
+    false
   end
 
   def remaining_pieces(color) # creates an array of the remaining pieces w/desired color
-    pieces.includes(:game).where('color = ? and status = 1', color == 'white' ? 0 : 1).to_a
+    pieces.where('color = ? and status = 1', color == 'white' ? 0 : 1).to_a
   end
 
   def opposite_color(color) # returns the opposite color
