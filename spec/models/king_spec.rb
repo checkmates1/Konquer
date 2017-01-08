@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe King, type: :model do
   describe '.valid_move?' do
     let(:game) { FactoryGirl.create(:game) }
-    let(:king) { FactoryGirl.create(:king, x_position: 4, y_position: 0, game: game) }
+    let(:king) { FactoryGirl.create(:king, x_position: 4, y_position: 0, game: game, color: 'white') }
 
     context 'when valid' do
       it { expect(king.valid_move?(4, 1)).to eq true }
@@ -27,6 +27,13 @@ RSpec.describe King, type: :model do
       it 'returns false' do
         FactoryGirl.create(:king, x_position: 3, y_position: 0, game: game)
         expect(king.valid_move?(4, 0)).to eq false
+      end
+    end
+
+    context 'when destination is in check' do
+      it 'returns false' do
+        FactoryGirl.create(:queen, x_position: 0, y_position: 0, game: game, color: 'black')
+        expect(king.valid_move?(3, 0)).to eq false
       end
     end
   end

@@ -1,8 +1,8 @@
 class Game < ActiveRecord::Base
   has_many :pieces
-  belongs_to :black_player
-  belongs_to :white_player
-  belongs_to :active_player
+  belongs_to :black_player, class_name: 'User'
+  belongs_to :white_player, class_name: 'User'
+  belongs_to :active_player, class_name: 'User'
 
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
@@ -33,7 +33,20 @@ class Game < ActiveRecord::Base
   end
 
   def check?
-    kings_in_check?('white') || kings_in_check?('black')
+    white_king = pieces.find_by(type: 'King', color: 'white')
+    black_king = pieces.find_by(type: 'King', color: 'black')
+    king_in_check?(white_king) || king_in_check?(black_king)
+  end
+
+  def king_in_check?(king, x = king.x_position, y = king.y_position)
+    enemy_pieces = remaining_pieces(opposite_color(king.color)) # creates array of enemy pieces
+    enemy_pieces.each do |piece|
+      if piece.valid_move?(x, y)
+        @piece_in_check = piece # stores piece that has king in check
+        return true
+      end
+    end
+    false
   end
 
   def stalemate?
@@ -65,17 +78,5 @@ class Game < ActiveRecord::Base
 
   def opposite_color(color) # returns the opposite color
     color == 'white' ? 'black' : 'white'
-  end
-
-  def kings_in_check?(color)
-    king = pieces.find_by(type: 'King', color: color)
-    enemy = remaining_pieces(opposite_color(color)) # creates array of enemy pieces
-    enemy.each do |piece|
-      if piece.valid_move?(king.x_position, king.y_position)
-        @piece_in_check = piece # stores piece that has king in check
-        return true
-      end
-    end
-    false
   end
 end
