@@ -1,5 +1,6 @@
 class King < Piece
   def valid_move?(destination_x, destination_y)
+    return false unless (0..7).cover?(destination_x) && (0..7).cover?(destination_y)
     x_difference = x_position - destination_x
     y_difference = y_position - destination_y
     return false if game.king_in_check?(self, destination_x, destination_y)
