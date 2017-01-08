@@ -28,7 +28,6 @@ RSpec.describe Game, type: :model do
     let(:user_black) { FactoryGirl.create(:user) }
     let(:game) { FactoryGirl.create(:game, white_player: user_white, black_player: user_black, active_player: user_black) }
 
-
     it 'should return true' do
       FactoryGirl.create(:king, x_position: 0, y_position: 0, color: 'black', game: game)
       FactoryGirl.create(:bishop, x_position: 2, y_position: 1, color: 'white', game: game)

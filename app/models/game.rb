@@ -58,8 +58,6 @@ class Game < ActiveRecord::Base
     false
   end
 
-
-
   private
 
   def king_has_valid_move?(king)
