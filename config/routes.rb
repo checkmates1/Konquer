@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root 'play#index'
   resources :games, only: [:new, :create, :show, :update] do
+    member do
+      put :forfeit
+    end
     resources :pieces, only: [:show, :update]
   end
   # The priority is based upon order of creation: first created -> highest priority.

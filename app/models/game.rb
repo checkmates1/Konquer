@@ -3,9 +3,10 @@ class Game < ActiveRecord::Base
   belongs_to :black_player, class_name: 'User'
   belongs_to :white_player, class_name: 'User'
   belongs_to :active_player, class_name: 'User'
+  belongs_to :winning_player, class_name: 'User'
 
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
-  scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
+  scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL AND winning_player_id IS NULL') }
 
   def populate_board!
     (0..7).each do |i|
@@ -47,6 +48,19 @@ class Game < ActiveRecord::Base
       end
     end
     false
+  end
+
+  def forfeit(current_user)
+    if current_user == white_player
+      white_player.increment(:losses)
+      black_player.increment(:wins)
+      winning_player = black_player
+    else
+      white_player.increment(:wins)
+      black_player.increment(:losses)
+      winning_player = white_player
+    end
+    update!(winning_player: winning_player)
   end
 
   private
