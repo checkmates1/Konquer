@@ -63,6 +63,15 @@ class Game < ActiveRecord::Base
     update!(winning_player: winning_player)
   end
 
+  def assign_turn(player)
+    active_player = if player == white_player
+                      white_player
+                    else
+                      black_player
+                    end
+    update!(active_player: active_player)
+  end
+
   private
 
   def remaining_pieces(color) # creates an array of the remaining pieces w/desired color
