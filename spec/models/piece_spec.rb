@@ -125,9 +125,7 @@ RSpec.describe Piece, type: :model do
       expect(game.pieces.find_by(x_position: 4, y_position: 7).type).to eq 'King'
     end
   end
-end
 
-RSpec.describe Piece, type: :model do
   describe '.move_to! method with move validation,' do
     let(:user1) { FactoryGirl.create(:user) }
     let(:user2) { FactoryGirl.create(:user) }
