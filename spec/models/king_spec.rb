@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe King, type: :model do
   describe '.valid_move?' do
-    let(:game) { FactoryGirl.create(:game) }
+    let(:user) { FactoryGirl.create(:user) }
+    let(:game) { FactoryGirl.create(:game, white_player: user, active_player: user) }
     let(:king) { FactoryGirl.create(:king, x_position: 4, y_position: 0, game: game, color: 'white') }
 
     context 'when valid' do
