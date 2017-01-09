@@ -32,7 +32,6 @@ class King < Piece
 
   def destination_in_check?(destination_x, destination_y)
     active_player_color = game.active_player == game.white_player ? 'white' : 'black'
-    # binding.pry
     return false if color != active_player_color
     game.king_in_check?(self, destination_x, destination_y)
   end

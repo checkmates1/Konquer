@@ -52,7 +52,6 @@ class Game < ActiveRecord::Base
   def king_in_check?(king, x = king.x_position, y = king.y_position)
     enemy_pieces = remaining_pieces(opposite_color(king.color)) # creates array of enemy pieces
     enemy_pieces.each do |piece|
-      # binding.pry
       return true if piece.valid_move?(x, y)
     end
     false
