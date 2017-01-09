@@ -23,6 +23,12 @@ class GamesController < ApplicationController
     redirect_to game_path(@game)
   end
 
+  def forfeit
+    @game = current_game
+    @game.forfeit(current_user)
+    redirect_to game_path, alert: 'You have forfeited.'
+  end
+
   private
 
   def game_params

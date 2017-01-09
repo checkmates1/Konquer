@@ -8,7 +8,6 @@ class PiecesController < ApplicationController
     @selected_piece = Piece.find(params[:id])
     @selected_piece.update_attributes(piece_params)
     redirect_to game_path(@selected_piece.game)
-    # redirect_to game_path
   end
 
   private
