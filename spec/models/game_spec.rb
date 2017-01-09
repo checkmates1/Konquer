@@ -39,6 +39,8 @@ RSpec.describe Game, type: :model do
       FactoryGirl.create(:king, x_position: 3, y_position: 2, color: 'white', game: game)
       FactoryGirl.create(:queen, x_position: 2, y_position: 3, color: 'white', game: game)
       expect(game.stalemate?).to eq false
+    end
+  end
 
   describe '.forfeit' do
     let(:white_player) { FactoryGirl.create(:user, wins: 0, losses: 0) }
