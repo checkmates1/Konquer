@@ -35,6 +35,12 @@
   <% end %>
 <% end %>
 
+<% if (@game.winning_player == nil && @game.white_player_id && @game.black_player_id)  && @game.pieces != []%>
+  <% if @game.stalemate? %>
+    <%= redirect_to stalemate_game_path(@game), method: :put %>
+  <% end %>
+<% end %>
+
 <div class="grass valign-wrapper green lighten-3">
   <div class="card-panel frame">
     <div class="spacing">

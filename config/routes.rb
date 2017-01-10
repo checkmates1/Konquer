@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :games, only: [:new, :create, :show, :update] do
     member do
       put :forfeit
+      put :stalemate
     end
     resources :pieces, only: [:show, :update]
   end

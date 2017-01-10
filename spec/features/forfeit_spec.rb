@@ -7,6 +7,9 @@ RSpec.feature 'forfeit a game' do
 
   context 'when forfeitting' do
     it 'allows user to quit' do
+      FactoryGirl.create(:king, x_position: 0, y_position: 0, color: 'black', game: game)
+      FactoryGirl.create(:king, x_position: 3, y_position: 2, color: 'white', game: game)
+      FactoryGirl.create(:queen, x_position: 2, y_position: 3, color: 'white', game: game)
       login_as(user1)
       visit game_path(game)
       find_link('Forfeit')
