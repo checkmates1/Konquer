@@ -5,7 +5,7 @@ module GamesHelper
   end
 
   def image_name(piece)
-    'pieces/' + piece.color + '-' + piece.type.downcase! + '.png'
+    'pieces/' + piece.type + ' ' + piece.color + '.png'
   end
 
   def avatar_url(user)
