@@ -1,8 +1,9 @@
 class King < Piece
   def valid_move?(destination_x, destination_y)
+    return false unless (0..7).cover?(destination_x) && (0..7).cover?(destination_y)
+    return false if destination_in_check?(destination_x, destination_y)
     x_difference = x_position - destination_x
     y_difference = y_position - destination_y
-    return false if game.king_in_check?(self, destination_x, destination_y)
     return true if vertical_move(destination_y, x_difference, y_difference)
     return true if horizontal_move(destination_x, x_difference, y_difference)
     return true if diagonal_move(destination_x, destination_y, x_difference, y_difference)
@@ -27,5 +28,11 @@ class King < Piece
     return false unless x_difference.abs == 1 && y_difference.abs == 1
     return true unless diagonal_obstruction?(destination_x, destination_y, x_difference, y_difference)
     false
+  end
+
+  def destination_in_check?(destination_x, destination_y)
+    active_player_color = game.active_player == game.white_player ? 'white' : 'black'
+    return false if color != active_player_color
+    game.king_in_check?(self, destination_x, destination_y)
   end
 end
