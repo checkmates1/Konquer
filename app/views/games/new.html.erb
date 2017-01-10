@@ -1,10 +1,12 @@
-<div class="card col s12 center">
-  <div class="card-panel form-control col s6">
+<div class="card-panel col s3 black white-text formatting">
+  <h1>Start a New Game</h1>
     <%= simple_form_for @game do |f| %>
-      <div class="container">
+      <div class="field">
       <%= f.input :name, required: true, label: 'Enter a name', error: 'Game MUST have name LESS than 10 characters!', input_html: { maxlength: 10 } %>
       </div>
-      <%= f.button :submit %>
+      <div class="actions">
+        <%= f.submit "Start", class: "waves-effect waves-light btn" %>
+      </div>
     <% end %>
   </div>
 </div>

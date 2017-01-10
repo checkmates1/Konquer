@@ -1,16 +1,27 @@
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import url('https://fonts.googleapis.com/css?family=Bungee+Shade');
+
 div.frame{
   background:url(frame.png) no-repeat;
   background-size: cover;
 }
-
-.grass {
+ 
+.background {
   flex: 1 0 auto;
   justify-content: center;
-  background:url(grass.jpg) no-repeat 0,0;
+  background:url(bkg-img.jpg) no-repeat 0,0;
   background-size: cover;
+}
+
+.formatting{
+  font-family: 'Bungee Shade', cursive;
+}
+
+.board {
+  flex: 1 0 auto;
+  justify-content: center;
 }
 
  @media screen and (min-width:320px)
@@ -22,6 +33,9 @@ div.frame{
     }div.spacing {
       padding-right:10px;
       margin-left: 10px;
+    }
+    div.row.top {
+      padding-top: -210px;
     }
 }
  @media screen and (min-width:600px)

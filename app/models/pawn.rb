@@ -11,8 +11,7 @@ class Pawn < Piece
   private
 
   def vertical_move(destination_y, x_difference, y_difference)
-    return true if y_difference == 2 && first_move?
-    return true if y_difference == 1 && x_difference.zero?
+    return true if (y_difference == 2 && first_move?) || (y_difference == 1 && x_difference.zero?)
     return false if vertical_obstruction?(destination_y, x_difference, y_difference)
     false
   end
@@ -24,7 +23,6 @@ class Pawn < Piece
   end
 
   def first_move?
-    return true if y_position == 1 && white?
-    return true if y_position == 6 && black?
+    return true if (y_position == 1 && white?) || (y_position == 6 && black?)
   end
 end

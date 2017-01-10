@@ -1,128 +1,129 @@
-<h1>Game: <%= @game.id %></h1>
-
-<% if user_signed_in? %>
-  <% if @game.white_player_id == nil %>
-    <%= link_to 'Join Game', game_path(@game, game: { white_player_id: current_user.id }), method: :put %>
-  <% elsif @game.black_player_id == nil && @game.white_player_id != nil %>
-    <% if @game.white_player_id == current_user.id %>
-      <p> Waiting for one more player </p>
+<div  class="card-panel col s3 black white-text formatting center">
+  <% if user_signed_in? %>
+    <h1><%= @game.name ? @game.name : "Game: " + @game.id.to_s %></h1>
+    <% if @game.white_player_id == nil %>
+      <%= link_to 'Join Game', game_path(@game, game: { white_player_id: current_user.id }), method: :put, class: "waves-effect waves-light btn" %>
+    <% elsif @game.black_player_id == nil && @game.white_player_id != nil %>
+      <% if @game.white_player_id == current_user.id %>
+        <p> Waiting for one more player </p>
+      <% else %>
+        <ul class="collection">
+          <%= render "games/player_detail", player: @white_player, color: "White" %>
+          <li class="collection-item valign-wrapper">
+            <%= link_to 'Join Game', game_path(@game, game: { black_player_id: current_user.id }), class: "waves-effect waves-light btn", method: :put %>
+          </li>
+        </ul>
+      <% end %>
     <% else %>
       <ul class="collection">
         <%= render "games/player_detail", player: @white_player, color: "White" %>
-        <li class="collection-item valign-wrapper">
-          <%= link_to 'Join Game', game_path(@game, game: { black_player_id: current_user.id }), class: 'btn btn-flat waves-effect', method: :put %>
-        </li>
+        <%= render "games/player_detail", player: @black_player, color: "Black" %>
       </ul>
+      <%= link_to 'Try Another Game', root_path, class: "waves-effect waves-light btn" %>
     <% end %>
   <% else %>
-    <ul class="collection">
-      <%= render "games/player_detail", player: @white_player, color: "White" %>
-      <%= render "games/player_detail", player: @black_player, color: "Black" %>
-    </ul>
-    <%= link_to 'Try Another Game', root_path %>
+    <%= link_to 'Sign In To Join', new_user_session_path, class: "waves-effect waves-light btn" %>
+    <br  />
+    <%= link_to 'Sign Up To Join', new_user_registration_path, class: "waves-effect waves-light btn" %>
   <% end %>
-<% else %>
-  <%= link_to 'Sign In To Join', new_user_session_path %>
-  <br  />
-  <%= link_to 'Sign Up To Join', new_user_registration_path %>
-<% end %>
 
-<h6><%= link_to 'Go back to open games', root_path %></h6>
+  <h6><%= link_to 'Go back to open games', root_path, class: "waves-effect waves-light btn" %></h6>
 
-<% if user_signed_in? %>
-  <% if @game.winning_player == nil && @game.white_player_id && @game.black_player_id %>
-    <%= link_to 'Forfeit', forfeit_game_path(@game), method: :put %>
+  <% if user_signed_in? %>
+    <% if @game.winning_player == nil && @game.white_player_id && @game.black_player_id %>
+      <%= link_to 'Forfeit', forfeit_game_path(@game), method: :put, class: "waves-effect waves-light btn" %>
+    <% end %>
   <% end %>
-<% end %>
 
-<div class="grass valign-wrapper green lighten-3">
-  <div class="card-panel frame">
-    <div class="spacing">
-      <div class="row top">
-        <div class="black left"><%= render_piece(0,7) %></div>
-        <div class="white left"><%= render_piece(1,7) %></div>
-        <div class="black left"><%= render_piece(2,7) %></div>
-        <div class="white left"><%= render_piece(3,7) %></div>
-        <div class="black left"><%= render_piece(4,7) %></div>
-        <div class="white left"><%= render_piece(5,7) %></div>`
-        <div class="black left"><%= render_piece(6,7) %></div>
-        <div class="white left"><%= render_piece(7,7) %></div>
-      </div>
+  <div class="board valign-wrapper">
+    <div class="card-panel frame">
+      <div class="spacing">
+        <div class="row">
+          <div class="black left"><%= render_piece(0,7) %></div>
+          <div class="white left"><%= render_piece(1,7) %></div>
+          <div class="black left"><%= render_piece(2,7) %></div>
+          <div class="white left"><%= render_piece(3,7) %></div>
+          <div class="black left"><%= render_piece(4,7) %></div>
+          <div class="white left"><%= render_piece(5,7) %></div>`
+          <div class="black left"><%= render_piece(6,7) %></div>
+          <div class="white left"><%= render_piece(7,7) %></div>
+        </div>
 
-      <div class="row">
-        <div class="white left"><%= render_piece(0,6) %></div>
-        <div class="black left"><%= render_piece(1,6) %></div>
-        <div class="white left"><%= render_piece(2,6) %></div>
-        <div class="black left"><%= render_piece(3,6) %></div>
-        <div class="white left"><%= render_piece(4,6) %></div>
-        <div class="black left"><%= render_piece(5,6) %></div>
-        <div class="white left"><%= render_piece(6,6) %></div>
-        <div class="black left"><%= render_piece(7,6) %></div>
-      </div>
+        <div class="row">
+          <div class="white left"><%= render_piece(0,6) %></div>
+          <div class="black left"><%= render_piece(1,6) %></div>
+          <div class="white left"><%= render_piece(2,6) %></div>
+          <div class="black left"><%= render_piece(3,6) %></div>
+          <div class="white left"><%= render_piece(4,6) %></div>
+          <div class="black left"><%= render_piece(5,6) %></div>
+          <div class="white left"><%= render_piece(6,6) %></div>
+          <div class="black left"><%= render_piece(7,6) %></div>
+        </div>
 
-      <div class="row">
-        <div class="black left"><%= render_piece(0,5) %></div>
-        <div class="white left"><%= render_piece(1,5) %></div>
-        <div class="black left"><%= render_piece(2,5) %></div>
-        <div class="white left"><%= render_piece(3,5) %></div>
-        <div class="black left"><%= render_piece(4,5) %></div>
-        <div class="white left"><%= render_piece(5,5) %></div>
-        <div class="black left"><%= render_piece(6,5) %></div>
-        <div class="white left"><%= render_piece(7,5) %></div>
-      </div>
+        <div class="row">
+          <div class="black left"><%= render_piece(0,5) %></div>
+          <div class="white left"><%= render_piece(1,5) %></div>
+          <div class="black left"><%= render_piece(2,5) %></div>
+          <div class="white left"><%= render_piece(3,5) %></div>
+          <div class="black left"><%= render_piece(4,5) %></div>
+          <div class="white left"><%= render_piece(5,5) %></div>
+          <div class="black left"><%= render_piece(6,5) %></div>
+          <div class="white left"><%= render_piece(7,5) %></div>
+        </div>
 
-      <div class="row">
-        <div class="white left"><%= render_piece(0,4) %></div>
-        <div class="black left"><%= render_piece(1,4) %></div>
-        <div class="white left"><%= render_piece(2,4) %></div>
-        <div class="black left"><%= render_piece(3,4) %></div>
-        <div class="white left"><%= render_piece(4,4) %></div>
-        <div class="black left"><%= render_piece(5,4) %></div>
-        <div class="white left"><%= render_piece(6,4) %></div>
-        <div class="black left"><%= render_piece(7,4) %></div>
-      </div>
+        <div class="row">
+          <div class="white left"><%= render_piece(0,4) %></div>
+          <div class="black left"><%= render_piece(1,4) %></div>
+          <div class="white left"><%= render_piece(2,4) %></div>
+          <div class="black left"><%= render_piece(3,4) %></div>
+          <div class="white left"><%= render_piece(4,4) %></div>
+          <div class="black left"><%= render_piece(5,4) %></div>
+          <div class="white left"><%= render_piece(6,4) %></div>
+          <div class="black left"><%= render_piece(7,4) %></div>
+        </div>
 
-      <div class="row">
-        <div class="black left"><%= render_piece(0,3) %></div>
-        <div class="white left"><%= render_piece(1,3) %></div>
-        <div class="black left"><%= render_piece(2,3) %></div>
-        <div class="white left"><%= render_piece(3,3) %></div>
-        <div class="black left"><%= render_piece(4,3) %></div>
-        <div class="white left"><%= render_piece(5,3) %></div>
-        <div class="black left"><%= render_piece(6,3) %></div>
-        <div class="white left"><%= render_piece(7,3) %></div>
-      </div>
+        <div class="row">
+          <div class="black left"><%= render_piece(0,3) %></div>
+          <div class="white left"><%= render_piece(1,3) %></div>
+          <div class="black left"><%= render_piece(2,3) %></div>
+          <div class="white left"><%= render_piece(3,3) %></div>
+          <div class="black left"><%= render_piece(4,3) %></div>
+          <div class="white left"><%= render_piece(5,3) %></div>
+          <div class="black left"><%= render_piece(6,3) %></div>
+          <div class="white left"><%= render_piece(7,3) %></div>
+        </div>
 
-      <div class="row">
-        <div class="white left"><%= render_piece(0,2) %></div>
-        <div class="black left"><%= render_piece(1,2) %></div>
-        <div class="white left"><%= render_piece(2,2) %></div>
-        <div class="black left"><%= render_piece(3,2) %></div>
-        <div class="white left"><%= render_piece(4,2) %></div>
-        <div class="black left"><%= render_piece(5,2) %></div>
-        <div class="white left"><%= render_piece(6,2) %></div>
-        <div class="black left"><%= render_piece(7,2) %></div>
-      </div>
-      <div class="row">
-        <div class="black left"><%= render_piece(0,1) %></div>
-        <div class="white left"><%= render_piece(1,1) %></div>
-        <div class="black left"><%= render_piece(2,1) %></div>
-        <div class="white left"><%= render_piece(3,1) %></div>
-        <div class="black left"><%= render_piece(4,1) %></div>
-        <div class="white left"><%= render_piece(5,1) %></div>
-        <div class="black left"><%= render_piece(6,1) %></div>
-        <div class="white left"><%= render_piece(7,1) %></div>
-      </div>
+        <div class="row">
+          <div class="white left"><%= render_piece(0,2) %></div>
+          <div class="black left"><%= render_piece(1,2) %></div>
+          <div class="white left"><%= render_piece(2,2) %></div>
+          <div class="black left"><%= render_piece(3,2) %></div>
+          <div class="white left"><%= render_piece(4,2) %></div>
+          <div class="black left"><%= render_piece(5,2) %></div>
+          <div class="white left"><%= render_piece(6,2) %></div>
+          <div class="black left"><%= render_piece(7,2) %></div>
+        </div>
+        <div class="row">
+          <div class="black left"><%= render_piece(0,1) %></div>
+          <div class="white left"><%= render_piece(1,1) %></div>
+          <div class="black left"><%= render_piece(2,1) %></div>
+          <div class="white left"><%= render_piece(3,1) %></div>
+          <div class="black left"><%= render_piece(4,1) %></div>
+          <div class="white left"><%= render_piece(5,1) %></div>
+          <div class="black left"><%= render_piece(6,1) %></div>
+          <div class="white left"><%= render_piece(7,1) %></div>
+        </div>
 
-      <div class="row bottom">
-        <div class="white left"><%= render_piece(0,0) %></div>
-        <div class="black left"><%= render_piece(1,0) %></div>
-        <div class="white left"><%= render_piece(2,0) %></div>
-        <div class="black left"><%= render_piece(3,0) %></div>
-        <div class="white left"><%= render_piece(4,0) %></div>
-        <div class="black left"><%= render_piece(5,0) %></div>
-        <div class="white left"><%= render_piece(6,0) %></div>
-        <div class="black left"><%= render_piece(7,0) %></div>
+        <div class="row">
+          <div class="white left"><%= render_piece(0,0) %></div>
+          <div class="black left"><%= render_piece(1,0) %></div>
+          <div class="white left"><%= render_piece(2,0) %></div>
+          <div class="black left"><%= render_piece(3,0) %></div>
+          <div class="white left"><%= render_piece(4,0) %></div>
+          <div class="black left"><%= render_piece(5,0) %></div>
+          <div class="white left"><%= render_piece(6,0) %></div>
+          <div class="black left"><%= render_piece(7,0) %></div>
+        </div>
       </div>
     </div>
   </div>
