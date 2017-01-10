@@ -64,16 +64,10 @@ RSpec.describe Game, type: :model do
   describe 'assign_turn' do
     let(:white_player) { FactoryGirl.create(:user) }
     let(:black_player) { FactoryGirl.create(:user) }
-    let(:game) { FactoryGirl.create(:game, white_player: white_player, black_player: black_player) }
+    let(:game) { FactoryGirl.create(:game, white_player: white_player, black_player: black_player, active_player: white_player) }
 
-    it 'assigns active_player to white_player if assign_turn method is called' do
-      game.assign_turn(white_player)
-      expect(game.reload.active_player).to eq white_player
-    end
-
-    it 'assigns active_player to black_player if assign_turn method is called' do
-      game.assign_turn(black_player)
-      expect(game.reload.active_player).to eq black_player
+    it 'should return white_player' do
+      expect(game.assign_turn).to eq white_player
     end
   end
 end
