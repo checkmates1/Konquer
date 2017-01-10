@@ -8,4 +8,9 @@ module GamesHelper
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=48"
   end
+
+  def assign_player_turn
+    return "White Player's Turn" if @game.assign_turn == @game.white_player
+    "Black Player's Turn" if @game.assign_turn == @game.black_player
+  end
 end
