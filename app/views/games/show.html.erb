@@ -1,3 +1,34 @@
+<script type="text/javascript">
+  $(function() {
+    $('.piece').draggable({
+      cursor: 'crosshair'
+    });
+
+    $('.left').droppable({
+      drop: function(event, ui) {
+          alert("X position = " + ui.draggable.data('x') + "  Y position = " + ui.draggable.data('y'))
+          $.ajax({
+            type: 'PUT',
+            url: ui.draggable.data('update-game'),
+            dataType: 'json',
+            data: {piece: {x_position: ui.draggable.data('x'),
+                          y_position: ui.draggable.data('y') } },
+            success: function(data) {
+              alert("New x: " + ui.draggable.data('x') + "New y: " + ui.draggable.data('y'))
+            }
+
+            });
+          }
+        });
+    });
+
+
+
+
+
+</script>
+<div data-update-game="<%= game_path(@game)%>"></div>
+
 <h1>Game: <%= @game.id %></h1>
 
 <% if user_signed_in? %>

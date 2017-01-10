@@ -6,10 +6,15 @@
     <% else %>
       <% space_color = x.even? ? 'white' : 'black' %>
     <% end %>
-    <div
-      class="<%= space_color %> left"
+    <div class="<%= space_color %> left"
       data-x="<%= x %>"
-      data-y="<%= y %>"><%= render_piece(x,y) %></div>
+      data-y="<%= y %>">
+        <div class='piece'
+          data-x="<%= x %>"
+          data-y="<%= y %>">
+          <%= render_piece(x,y) %>
+        </div>
+    </div>
   <% end %>
   </div>
 <% end %>

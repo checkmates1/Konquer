@@ -1,5 +1,12 @@
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require turbolinks
 //= require materialize-sprockets
 //= require_tree .
+//= require jquery-ui/widgets/mouse
+//= require jquery-ui/widgets/draggable
+//= require jquery-ui/widgets/droppable
+//= require jquery-ui/widgets/resizable
+//= require jquery-ui/widgets/selectable
+//= require jquery-ui/widgets/sortable
