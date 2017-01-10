@@ -1,7 +1,7 @@
 module GamesHelper
   def render_piece(x, y)
     piece = @game.pieces.find_by(x_position: x, y_position: y)
-    link_to image_tag(image_name(piece), class: 'responsive-img'), game_piece_path(@game, piece) if piece
+    link_to image_tag(image_name(piece), class: 'responsive-img'), game_piece_path(@game, piece) if piece && @game.white_player && @game.black_player
   end
 
   def image_name(piece)
