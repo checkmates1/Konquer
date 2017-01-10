@@ -38,21 +38,7 @@
 <div class="grass valign-wrapper green lighten-3">
   <div class="card-panel frame">
     <div class="spacing">
-      <% (0..7).each do |y| %>
-        <div class="row <%= 'top' if y.zero?%> <%= 'bottom' if y == 7 %>">
-        <% (0..7).each do |x| %>
-          <% if y.even? %>
-            <% space_color = x.even? ? 'black' : 'white' %>
-          <% else %>
-            <% space_color = x.even? ? 'white' : 'black' %>
-          <% end %>
-          <div
-            class="<%= space_color %> left"
-            data-x="<%= x %>"
-            data-y="<%= y %>"><%= render_piece(x,y) %></div>
-        <% end %>
-        </div>
-      <% end %>
+      <%= render "games/board" %>
     </div>
   </div>
 </div>
