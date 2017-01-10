@@ -7,14 +7,9 @@ div.frame{
   background:url(frame.png) no-repeat;
   background-size: cover;
 }
- 
-.background {
-  flex: 1 0 auto;
-  justify-content: center;
-  background:url(bkg-img.jpg) no-repeat 0,0;
-  background-size: cover;
+div.row div.black {
+  background:url(wood.png);
 }
-
 .formatting{
   font-family: 'Bungee Shade', cursive;
 }
