@@ -3,8 +3,25 @@
  *= require_self
  *= require jquery-ui
  */
-
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One');
  @import "materialize/components/color";
  // $primary-color: color("blue", "lighten-2") !default;
  // $secondary-color: color("yellow", "base") !default;
  @import 'materialize';
+
+.nav-wrapper {
+  background-color: #00698C;
+}
+
+.brand-logo {
+  font-family: 'Alfa Slab One', cursive;
+  font-size: 100px;
+}
+
+.brand-logo a:hover {
+  text-decoration: none;
+}
+
+.waves-effect waves-teal btn-flat {
+  background-color: #003D52;
+}

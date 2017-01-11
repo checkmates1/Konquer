@@ -5,4 +5,5 @@ class DashboardsController < ApplicationController
     @games = Game.all
   end
 
+
 end
