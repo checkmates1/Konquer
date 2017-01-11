@@ -25,7 +25,6 @@ class GamesController < ApplicationController
     @game.update_attributes(game_attributes)
     @selected_piece = Piece.find(params[:id])
     @selected_piece.update_attributes(piece_position)
-    redirect_to game_path(@game)
   end
 
   def forfeit
@@ -45,7 +44,7 @@ class GamesController < ApplicationController
   end
 
   def game_attributes
-    params.require(:game).permit(:white_player_id, :black_player_id)
+    params.permit(:white_player_id, :black_player_id, :x_position, :y_position)
   end
 
   def current_game

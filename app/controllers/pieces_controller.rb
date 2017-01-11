@@ -1,6 +1,6 @@
 class PiecesController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
+
   def show
     @selected_piece = Piece.find(params[:id])
     @game = @selected_piece.game
@@ -9,7 +9,6 @@ class PiecesController < ApplicationController
   def update
     @selected_piece = Piece.find(params[:id])
     @selected_piece.update_attributes(piece_params)
-    redirect_to game_path(@selected_piece.game)
   end
 
   private
