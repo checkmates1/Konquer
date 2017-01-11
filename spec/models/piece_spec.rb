@@ -127,29 +127,29 @@ RSpec.describe Piece, type: :model do
   end
 
   describe '.move_to! method with move validation,' do
-    let(:user1) { FactoryGirl.create(:user) }
-    let(:user2) { FactoryGirl.create(:user) }
-    let(:game) { FactoryGirl.create(:game, white_player_id: user1.id, black_player_id: user2.id) }
+    let(:user_white) { FactoryGirl.create(:user) }
+    let(:user_black) { FactoryGirl.create(:user) }
+    let(:game) { FactoryGirl.create(:game, white_player_id: user_white.id, black_player_id: user_black.id) }
     let(:pawn1) { FactoryGirl.create(:pawn, x_position: 0, y_position: 1, color: 'white', game: game) }
     let(:pawn2) { FactoryGirl.create(:pawn, x_position: 1, y_position: 2, color: 'black', game: game) }
     let(:queen) { FactoryGirl.create(:queen, x_position: 1, y_position: 1, color: 'white', game: game) }
     context 'should update piece position' do
       it 'when valid move' do
-        login_as(user1, scope: :user)
+        login_as(user_white, scope: :user)
         pawn1.move_to!(0, 3)
         expect(pawn1.y_position).to eq 3
       end
     end
     context 'should update piece position and capture' do
       it 'when valid move to enemy position' do
-        login_as(user2, scope: :user)
+        login_as(user_black, scope: :user)
         pawn2.move_to!(1, 1)
         expect(game.pieces.find_by(x_position: 1, y_position: 1).type).to eq 'Pawn'
       end
     end
     context 'should not update piece position' do
       it 'when invalid move' do
-        login_as(user1, scope: :user)
+        login_as(user_white, scope: :user)
         pawn1.move_to!(0, 5)
         pawn2.move_to!(1, 3)
         queen.move_to!(-1, 1000)

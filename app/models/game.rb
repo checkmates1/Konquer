@@ -8,6 +8,8 @@ class Game < ActiveRecord::Base
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL AND winning_player_id IS NULL') }
 
+  before_save :default_active_player
+
   def populate_board!
     (0..7).each do |i|
       pieces.create(type: 'Pawn', x_position: i, y_position: 1, color: 'white')
@@ -71,18 +73,14 @@ class Game < ActiveRecord::Base
     update!(winning_player: winning_player)
   end
 
-  def active_player_valid?
-    if active_player
-      if (active_player != white_player) && (active_player != black_player)
-        return false
-      end
+  def assign_active_player
+    if self.active_player == white_player
+      self.update_attributes(active_player: black_player)
+    elsif self.active_player == black_player
+      self.update_attributes(active_player: white_player)
+    else
+      return nil
     end
-  end
-
-  def assign_active_player(player)
-    active_player = white_player if player == white_player
-    active_player = black_player if player == black_player
-    update!(active_player: active_player)
   end
 
   private
@@ -105,4 +103,9 @@ class Game < ActiveRecord::Base
   def opposite_color(color) # returns the opposite color
     color == 'white' ? 'black' : 'white'
   end
+
+  def default_active_player
+    self.active_player ||= white_player
+  end
+
 end
