@@ -49,7 +49,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
 end
 
-gem 'figaro'
 gem 'devise', '~> 4.1.1'
-gem 'omniauth-facebook'
+gem 'figaro'
 gem 'materialize-sass'
+gem 'omniauth-facebook'
