@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  resource :dashboard, only: [:show]
   root 'play#index'
   resources :games, only: [:new, :create, :show, :update] do
     member do

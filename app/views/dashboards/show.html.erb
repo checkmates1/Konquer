@@ -1,0 +1,31 @@
+<h2> Hello <%= current_user.email %> </h2>
+<%= link_to "Home", root_path %>
+
+<div class="user-games">
+  <h4> User Games: </h4>
+  <% @games.each do |game| %>
+    <li>
+      <%= game.name %>
+      <%= game.id %>
+    </li>
+  <% end %>
+</div>
+
+<% @games.each do |game| %>
+  <% if current_user.id == game.white_player_id || current_user.id == game.black_player_id %>
+    <li>
+      <%= game.name %>
+      <%= game.id %>
+    </li>
+  <% end %>
+<% end %>
+
+
+<div class="record">
+  <h6>User Record:</h6>
+  <p>
+    Wins: <%= current_user.wins %>
+    <br  / />
+    Losses: <%= current_user.losses %>
+  </p>
+</div>
