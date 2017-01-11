@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $(function() {
     $('.piece').draggable({
       cursor: 'crosshair'
@@ -20,6 +20,38 @@
           }
         });
     });
+</script> -->
+
+<script>
+$(function() {
+  $('.piece').draggable({
+    cursor: 'crosshair'
+  });
+
+  $('.left').droppable({
+    drop: function(event, ui) {
+      var piece = ui.draggable
+      var destination_square = $(this);
+      var update_piece = {
+        id: piece.data('piece-id'),
+        x_position: destination_square.data('x'),
+        y_position: destination_square.data('y'),
+      }
+      $.ajax({
+        type: 'PATCH',
+        url: '/pieces/' + update_piece.id,
+        dataType: 'json',
+        data: {piece_id: update_piece.id, x_position: update_piece.x_position, y_position: update_piece.y_position},
+        success: function(data) {
+          destination_square.empty();
+        },
+        error: function(data) {
+          alert("Invalid Move");
+        }
+      });
+    }
+  });
+});
 </script>
 
 <div data-update-game="<%= game_piece_path(@game, @selected_piece)%>"></div>
