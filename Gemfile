@@ -50,4 +50,6 @@ group :development, :test do
 end
 
 gem 'devise', '~> 4.1.1'
+gem 'figaro'
 gem 'materialize-sass'
+gem 'omniauth-facebook'
