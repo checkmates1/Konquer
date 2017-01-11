@@ -11,9 +11,9 @@
             type: 'PUT',
             url: ui.draggable.data('update-game'),
             dataType: 'json',
-            data: { piece: {x_position: ui.draggable.data('x'),
+            data: JSON.stringify({ piece: {x_position: ui.draggable.data('x'),
                           y_position: ui.draggable.data('y') }
-                    },
+                    }),
             success: function(data) {
               if(data.success)
                 alert("New x: " + ui.draggable.data('x') + "New y: " + ui.draggable.data('y'))
@@ -24,7 +24,7 @@
     });
 </script>
 
-<div data-update-game="<%= game_path(@game)%>"></div>
+<div data-update-game="<%= game_piece_path(@game, @selected_piece)%>"></div>
 
 <h1>Game: <%= @game.id %></h1>
 
@@ -51,7 +51,7 @@
   <% end %>
 <% else %>
   <%= link_to 'Sign In To Join', new_user_session_path %>
-  <br  />
+  <br  />0
   <%= link_to 'Sign Up To Join', new_user_registration_path %>
 <% end %>
 

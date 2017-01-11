@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def new
     @game = Game.new
   end
@@ -13,6 +15,7 @@ class GamesController < ApplicationController
   def show
     redirect_to root_path unless user_signed_in?
     @game = Game.find(params[:id])
+    @selected_piece = Piece.find(params[:id])
     @white_player = User.find_by(id: @game.white_player_id) if @game.white_player_id
     @black_player = User.find_by(id: @game.black_player_id) if @game.black_player_id
   end
@@ -20,6 +23,8 @@ class GamesController < ApplicationController
   def update
     @game = current_game
     @game.update_attributes(game_attributes)
+    @selected_piece = Piece.find(params[:id])
+    @selected_piece.update_attributes(piece_position)
     redirect_to game_path(@game)
   end
 
@@ -30,6 +35,10 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def piece_position
+    params.permit(:x_position, :y_position)
+  end
 
   def game_params
     params.require(:game).permit(:name)

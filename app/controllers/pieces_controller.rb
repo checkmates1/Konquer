@@ -1,4 +1,6 @@
 class PiecesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  
   def show
     @selected_piece = Piece.find(params[:id])
     @game = @selected_piece.game
