@@ -71,9 +71,18 @@ class Game < ActiveRecord::Base
     update!(winning_player: winning_player)
   end
 
-  def assign_turn
-    return white_player if active_player == white_player
-    return black_player if active_player == black_player
+  def active_player_valid?
+    if active_player
+      if (active_player != white_player) && (active_player != black_player)
+        return false
+      end
+    end
+  end
+
+  def assign_active_player(player)
+    active_player = white_player if player == white_player
+    active_player = black_player if player == black_player
+    update!(active_player: active_player)
   end
 
   private

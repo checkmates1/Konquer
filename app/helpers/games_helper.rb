@@ -9,8 +9,13 @@ module GamesHelper
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=48"
   end
 
-  def assign_player_turn
-    return "White Player's Turn" if @game.assign_turn == @game.white_player
-    "Black Player's Turn" if @game.assign_turn == @game.black_player
-  end
+  # def assign_player_turn
+  #   return "White Player's Turn" if @game.assign_turn == @game.white_player
+  #   "Black Player's Turn" if @game.assign_turn == @game.black_player
+  # end
+
+  # def whose_turn(game)
+  #   return "It's your turn!" if current_user == game.assign_turn
+  #   "It's not your turn yet."
+  # end
 end

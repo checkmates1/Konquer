@@ -61,13 +61,40 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe 'assign_turn' do
+  describe 'active_player_valid?' do
+    it "allows active_player to be white player" do
+      g=FactoryGirl.create(:game)
+      g.active_player = g.white_player
+      expect(g).to be_valid
+      expect(g.active_player).to eq g.white_player
+    end
+
+    it "allows active_player to be black player" do
+      g=FactoryGirl.create(:game)
+      g.active_player = g.black_player
+      expect(g).to be_valid
+      expect(g.active_player).to eq g.black_player
+    end
+
+    it "does not allow active_player to be some third player" do
+      g=FactoryGirl.create(:game)
+      u= FactoryGirl.create(:user)
+      g.active_player = u
+      expect(g.active_player_valid?).to eq false
+    end
+  end
+
+  describe 'assign_active_player' do
     let(:white_player) { FactoryGirl.create(:user) }
     let(:black_player) { FactoryGirl.create(:user) }
-    let(:game) { FactoryGirl.create(:game, white_player: white_player, black_player: black_player, active_player: white_player) }
-
-    it 'should return white_player' do
-      expect(game.assign_turn).to eq white_player
+    let(:game) { FactoryGirl.create(:game, white_player: white_player, black_player: black_player) }
+    it 'should set active_player to white_player' do
+      game.assign_active_player(white_player)
+      expect(game.active_player).to eq white_player
+    end
+    it 'should set active_player to black_player' do
+      game.assign_active_player(black_player)
+      expect(game.active_player).to eq black_player
     end
   end
 end
