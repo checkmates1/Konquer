@@ -74,11 +74,11 @@ class Game < ActiveRecord::Base
   end
 
   def assign_active_player(player)
-    if player == white_player
-      active_player = black_player
-    else
-      active_player = white_player
-    end
+    active_player = if player == white_player
+                      black_player
+                    else
+                      white_player
+                    end
     update!(active_player: active_player)
   end
 
@@ -106,5 +106,4 @@ class Game < ActiveRecord::Base
   def default_active_player
     self.active_player ||= white_player
   end
-
 end

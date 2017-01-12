@@ -10,7 +10,7 @@ RSpec.describe PiecesController, type: :controller do
     let(:white_pawn) { FactoryGirl.create(:pawn, color: 'white', type: 'Pawn', game: game, x_position: 0, y_position: 0) }
     it 'should change active_player from white_player to black_player' do
       game.active_player = game.white_player
-      put :update, id: white_pawn.id, piece: { x_position: 0, y_position: 1 }
+      put :update, params: { id: white_pawn.id, piece: { x_position: 0, y_position: 1 } }
 
       expect(game.reload.active_player).to eq game.black_player
     end
