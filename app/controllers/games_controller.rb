@@ -3,6 +3,13 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
+  def check
+    @game = current_game
+    @game.check? 
+    flash[:notice] = "You are in Check"
+  end
+
+
   def create
     @game = Game.create(game_params)
     @game.populate_board!

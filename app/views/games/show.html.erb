@@ -1,5 +1,9 @@
 <h1>Game: <%= @game.id %></h1>
 
+<% if flash[:notice] %>
+  <div class = "notice"><% flash[:notice] %></div>
+<% end %>
+
 <% if user_signed_in? %>
   <% if @game.white_player_id == nil %>
     <%= link_to 'Join Game', game_path(@game, game: { white_player_id: current_user.id }), method: :put %>
