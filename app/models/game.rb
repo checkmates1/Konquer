@@ -73,14 +73,13 @@ class Game < ActiveRecord::Base
     update!(winning_player: winning_player)
   end
 
-  def assign_active_player
-    if self.active_player == white_player
-      self.update_attributes(active_player: black_player)
-    elsif self.active_player == black_player
-      self.update_attributes(active_player: white_player)
+  def assign_active_player(player)
+    if player == white_player
+      active_player = black_player
     else
-      return nil
+      active_player = white_player
     end
+    update!(active_player: active_player)
   end
 
   private

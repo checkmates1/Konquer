@@ -70,11 +70,11 @@ RSpec.describe Game, type: :model do
   end
 
   describe 'assign_active_player' do
-    let(:white_player) { FactoryGirl.create(:user) }
     let(:black_player) { FactoryGirl.create(:user) }
-    let(:game) { FactoryGirl.create(:game, white_player: white_player, black_player: black_player, active_player: white_player) }
+    let(:game) { FactoryGirl.create(:game, black_player: black_player) }
     it 'should change active_player from white_player to black_player' do
-      game.assign_active_player
+      game.active_player = game.white_player
+      game.assign_active_player(game.white_player)
       expect(game.active_player).to eq black_player
     end
   end
