@@ -10,12 +10,12 @@ module GamesHelper
   end
 
   # def assign_player_turn
-  #   return "White Player's Turn" if @game.assign_turn == @game.white_player
-  #   "Black Player's Turn" if @game.assign_turn == @game.black_player
+  #   return "White Player's Turn" if @game.assign_active_player == @game.white_player
+  #   "Black Player's Turn" if @game.assign_active_player == @game.black_player
   # end
 
-  # def whose_turn(game)
-  #   return "It's your turn!" if current_user == game.assign_turn
-  #   "It's not your turn yet."
-  # end
+  def whose_turn
+    return "Your turn!" if current_user == @game.active_player
+    "Not your turn yet."
+  end
 end
