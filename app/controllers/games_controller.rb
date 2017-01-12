@@ -5,10 +5,9 @@ class GamesController < ApplicationController
 
   def check
     @game = current_game
-    @game.check? 
-    flash[:notice] = "You are in Check"
+    @game.check?
+    flash[:notice] = 'You are in Check'
   end
-
 
   def create
     @game = Game.create(game_params)
