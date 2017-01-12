@@ -68,12 +68,12 @@ class Game < ActiveRecord::Base
       checkmate = false unless kings_in_check?
       undo_move
       end
-    end
       if checkmate == true
         return true
       else
         false
       end
+    end
   end
 
   private
@@ -85,4 +85,3 @@ class Game < ActiveRecord::Base
     end
     all_possible_moves
   end
-end
