@@ -61,7 +61,7 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe '.default_active_player' do
+  describe '.set_default_active_player' do
     let(:white_player) { FactoryGirl.create(:user) }
     let(:game) { FactoryGirl.create(:game, white_player: white_player) }
     it 'should set white_player to active_player at game start' do
@@ -69,12 +69,12 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe 'assign_active_player' do
+  describe 'swap_active_player' do
     let(:black_player) { FactoryGirl.create(:user) }
     let(:game) { FactoryGirl.create(:game, black_player: black_player) }
     it 'should change active_player from white_player to black_player' do
       game.active_player = game.white_player
-      game.assign_active_player(game.white_player)
+      game.swap_active_player(game.white_player)
       expect(game.active_player).to eq black_player
     end
   end

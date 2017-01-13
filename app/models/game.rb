@@ -8,7 +8,7 @@ class Game < ActiveRecord::Base
   delegate :pawns, :rooks, :knights, :bishops, :queens, :kings, to: :pieces
   scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL AND winning_player_id IS NULL') }
 
-  before_save :default_active_player
+  before_create :set_default_active_player
 
   def populate_board!
     (0..7).each do |i|
@@ -73,7 +73,7 @@ class Game < ActiveRecord::Base
     update!(winning_player: winning_player)
   end
 
-  def assign_active_player(player)
+  def swap_active_player(player)
     active_player = if player == white_player
                       black_player
                     else
@@ -103,7 +103,7 @@ class Game < ActiveRecord::Base
     color == 'white' ? 'black' : 'white'
   end
 
-  def default_active_player
+  def set_default_active_player
     self.active_player ||= white_player
   end
 end

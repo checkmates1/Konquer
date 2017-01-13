@@ -19,7 +19,7 @@ class Piece < ActiveRecord::Base
 
   def move_to!(destination_x, destination_y)
     destination = game.pieces.find_by(x_position: destination_x, y_position: destination_y)
-    return false unless valid_move?(destination_x, destination_y)
+    return unless valid_move?(destination_x, destination_y)
     return move_position(destination_x, destination_y) if destination.nil?
     return capture_piece(destination, destination_x, destination_y) if destination.color == color
   end
