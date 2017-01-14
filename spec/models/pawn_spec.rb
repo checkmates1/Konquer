@@ -32,8 +32,6 @@ RSpec.describe Pawn, type: :model do
       end
     end
   end
-end
-RSpec.describe Pawn, type: :model do
   describe '.valid_move?' do
     let(:game) { FactoryGirl.create(:game) }
     let(:pawn) { FactoryGirl.create(:pawn, x_position: 4, y_position: 6, color: 'black', game: game) }
