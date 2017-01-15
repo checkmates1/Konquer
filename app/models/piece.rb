@@ -22,6 +22,7 @@ class Piece < ActiveRecord::Base
     return unless valid_move?(destination_x, destination_y)
     return move_position(destination_x, destination_y) if destination.nil?
     return capture_piece(destination, destination_x, destination_y) if destination.color == color
+    swap_active_player(game.active_player)
   end
 
   def obstructed?(destination_x, destination_y)
@@ -42,6 +43,15 @@ class Piece < ActiveRecord::Base
   def capture_position(destination, destination_x, destination_y)
     destination.update_attributes(x_position: nil, y_position: nil, status: :dead)
     update_attributes(x_position: destination_x, y_position: destination_y)
+  end
+
+  def swap_active_player(player)
+    active_player = if player == white_player
+                      black_player
+                    else
+                      white_player
+                    end
+    update!(active_player: active_player)
   end
 
   def diagonal_obstruction?(destination_x, destination_y, x_difference, y_difference)

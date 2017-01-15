@@ -73,14 +73,7 @@ class Game < ActiveRecord::Base
     update!(winning_player: winning_player)
   end
 
-  def swap_active_player(player)
-    active_player = if player == white_player
-                      black_player
-                    else
-                      white_player
-                    end
-    update!(active_player: active_player)
-  end
+
 
   private
 

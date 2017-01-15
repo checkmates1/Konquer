@@ -15,7 +15,7 @@ module GamesHelper
   # end
 
   def whose_turn_text
-    return "Your turn!" if current_user == @game.active_player
-    "Not your turn yet."
+    return 'Your turn!' if current_user == @game.active_player
+    'Not your turn yet.'
   end
 end

@@ -69,13 +69,13 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe 'swap_active_player' do
-    let(:black_player) { FactoryGirl.create(:user) }
-    let(:game) { FactoryGirl.create(:game, black_player: black_player) }
-    it 'should change active_player from white_player to black_player' do
-      game.active_player = game.white_player
-      game.swap_active_player(game.white_player)
-      expect(game.active_player).to eq black_player
-    end
-  end
+  # describe 'swap_active_player' do
+  #   let(:black_player) { FactoryGirl.create(:user) }
+  #   let(:game) { FactoryGirl.create(:game, black_player: black_player) }
+  #   it 'should change active_player from white_player to black_player' do
+  #     game.active_player = game.white_player
+  #     game.swap_active_player(game.white_player)
+  #     expect(game.active_player).to eq black_player
+  #   end
+  # end
 end
