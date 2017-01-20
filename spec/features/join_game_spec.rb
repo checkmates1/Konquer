@@ -9,7 +9,7 @@ RSpec.feature 'join a game' do
     it 'allows user to join' do
       login_as(user2, scope: :user)
       visit game_path(game)
-
+      game.populate_board!
       find_link('Join Game')
       click_link('Join Game')
 

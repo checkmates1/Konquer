@@ -40,11 +40,9 @@ class Game < ActiveRecord::Base
   end
 
   def stalemate?
-    # get king
     color = active_player == white_player ? 0 : 1
-    king = pieces.find_by(type: 'King', color: color)
-
-    # check moves
+    king = pieces.find_by(type: 'King', color: color) # gets king
+    # checks moves
     return false if king_in_check?(king)
     return true unless king_has_valid_move?(king)
     false
@@ -58,26 +56,15 @@ class Game < ActiveRecord::Base
     false
   end
 
-  def forfeit(current_user)
-    if current_user == white_player
-      white_player.increment(:losses)
-      black_player.increment(:wins)
-      winning_player = black_player
-    else
-      white_player.increment(:wins)
-      black_player.increment(:losses)
-      winning_player = white_player
-    end
+  def forfeit(user)
+    user.increment(:losses)
+    other_user(user).increment(:wins)
+    winning_player = other_user(user)
     update!(winning_player: winning_player)
   end
 
   def assign_turn(player)
-    active_player = if player == white_player
-                      white_player
-                    else
-                      black_player
-                    end
-    update!(active_player: active_player)
+    update!(active_player: player)
   end
 
   private
@@ -99,5 +86,9 @@ class Game < ActiveRecord::Base
 
   def opposite_color(color) # returns the opposite color
     color == 'white' ? 'black' : 'white'
+  end
+
+  def other_user(user) # returns the other user
+    user == white_player ? black_player : white_player
   end
 end

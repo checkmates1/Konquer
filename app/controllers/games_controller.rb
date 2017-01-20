@@ -23,6 +23,12 @@ class GamesController < ApplicationController
     redirect_to game_path(@game)
   end
 
+  def stalemate
+    @game = current_game
+    @game.destroy
+    redirect_to game_path, alert: 'Stalemate. Game ends in a draw.'
+  end
+
   def forfeit
     @game = current_game
     @game.forfeit(current_user)
