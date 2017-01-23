@@ -1,7 +1,6 @@
 class GamesController < ApplicationController
-  def about
-  end
-  
+  def about; end
+
   def new
     @game = Game.new
   end

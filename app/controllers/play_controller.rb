@@ -3,5 +3,3 @@ class PlayController < ApplicationController
     @available_games = Game.available
   end
 end
-
-
