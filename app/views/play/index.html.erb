@@ -1,23 +1,10 @@
-<div class="center">
+<div id = "hero" class="center card-panel col s3 white-text formatting">
+  <h1 id="heading">Welcome to Chess</h1>
+  <h4 id= "subtitle"><i>Made with Rails and Materialize</i></h4>
   <% if user_signed_in? %>
-    <h3 class="card-panel col s3 black white-text formatting">
-    Available Games
-    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "waves-effect waves-light btn" %>
-    <%= link_to 'New Game', new_game_path, class: "waves-effect waves-light btn" %>
-    </h1>
-    <div class="card-panel col s3 black">
-      <% @available_games.each do |game| %>
-        <% if game.white_player == nil || game.black_player == nil %>
-          <li class="game flow-text game-listing">
-            <%= link_to "#{game.name ? game.name : 'Game: ' + game.id.to_s} - join now!", game_path(game), class: "teal-text" %>
-          </li>
-        <% end %>
-      <% end %>
-    </div>
+    <%= link_to 'View Available Games', games_path, class: "waves-effect waves-light btn" %>
   <% else %>
-    <h1 class="card-panel col s3 black white-text formatting">Create an Account to Play!
-    <%= link_to 'Sign In', new_user_session_path, class: "waves-effect waves-light btn" %>
+    <%= link_to 'Log In', new_user_session_path, class: "waves-effect waves-light btn" %>
     <%= link_to 'Sign Up', new_user_registration_path, class: "waves-effect waves-light btn" %>
-    </h1>
   <% end %>
 </div>

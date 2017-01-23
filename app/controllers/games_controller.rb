@@ -1,6 +1,13 @@
 class GamesController < ApplicationController
+  def about
+  end
+  
   def new
     @game = Game.new
+  end
+
+  def index
+    @available_games = Game.available
   end
 
   def create

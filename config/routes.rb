@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   root 'play#index'
-  resources :games, only: [:new, :create, :show, :update] do
+  resources :games, only: [:new, :create, :show, :update, :index] do
     member do
       put :forfeit
       put :stalemate
     end
     resources :pieces, only: [:show, :update]
   end
+  get 'about', to: 'games#about'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
