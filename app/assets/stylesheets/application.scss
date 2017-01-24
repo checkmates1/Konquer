@@ -7,4 +7,46 @@
  // $primary-color: color("blue", "lighten-2") !default;
  // $secondary-color: color("yellow", "base") !default;
  @import 'materialize';
+ @import url('https://fonts.googleapis.com/css?family=Bungee+Shade');
+
+ nav {
+  background-color: #222;
+ }
+
+ a.brand-logo {
+  font-family: 'Bungee Shade', cursive;
+  margin-left: 10px;
+  color: #34d8bc;
+ }
+
+ .waves-effect {
+  margin: 5px;
+ }
+
+ #hero {
+    background: rgba(4,10,10,0.8);
+    margin-top: 50px;
+ }
+
+ #available-games {
+  background: rgba(4,10,10,0.8);
+ }
+
+ #about_text {
+  text-align: left;
+  width: 60%;
+  margin: 30px auto;
+ }
+
+ h4 {
+  font-weight: 100;
+ }
+
+ nav ul a {
+  text-transform: uppercase;
+ }
+
+ .game-listing {
+  list-style-type: none;
+ }
 

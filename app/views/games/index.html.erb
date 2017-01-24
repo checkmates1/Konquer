@@ -1,0 +1,12 @@
+<div id = "hero" class = "center card-panel col s3 white-text formatting">
+  <h3 id = "heading">Available Games</h3>
+  <h4>
+    <% @available_games.each do |game| %>
+      <% if game.white_player == nil || game.black_player == nil %>
+        <li class="game flow-text game-listing">
+          <%= link_to "#{game.name ? game.name : 'Game: ' + game.id.to_s} - join now!", game_path(game), class: "teal-text" %>
+        </li>
+      <% end %>
+    <% end %>
+  </h4>
+</div>

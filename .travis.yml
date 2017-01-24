@@ -15,3 +15,4 @@ deploy:
     secure: f3bb0d1f-e1fd-438b-ba27-e49d475336ca
   app:
     master: mikes-checkmates
+  run: "rake db:migrate"

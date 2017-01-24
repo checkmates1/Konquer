@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import url('https://fonts.googleapis.com/css?family=Bungee+Shade');
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One|Raleway');
 
 div.frame{
   background:url(frame.png) no-repeat;
@@ -11,7 +12,19 @@ div.row div.black {
   background:url(wood.png);
 }
 .formatting{
-  font-family: 'Bungee Shade', cursive;
+  font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+  font-family: 'Fjalla One', sans-serif;
+}
+
+#heading {
+  margin-bottom: 0;
+}
+
+#subtitle {
+  margin: 10px 0 40px 0;
 }
 
 .board {
