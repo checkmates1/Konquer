@@ -4,6 +4,8 @@ Konquer
 
 Konquer is a Rails 4 based application that allows users to challenge one another to a game of chess. Built by a distributed Agile team of 5 developers under the guidance of [Mike Coutermarsh](https://github.com/mscoutermarsh), Software Engineer at Product Hunt, the team followed a Test-Driven Development workflow, regularly performed code reviews and pair-programmed to ensure a consistent, well-tested and team-friendly codebase.
 
+<img src='https://s3.amazonaws.com/poly-screenshots.angel.co/Project/9b/452211/c5f77a881de47f2847ad49e9e599988f-original.png' />
+
 Features
 ================
 * Responsive design
