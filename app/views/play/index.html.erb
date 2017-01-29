@@ -1,6 +1,7 @@
 <div id = "hero" class="center card-panel col s3 white-text formatting">
-  <h1 id="heading">Welcome to Chess</h1>
-  <h4 id= "subtitle"><i>Made with Rails and Materialize</i></h4>
+  <h1 id="heading">Konquer</h1>
+  <br>
+  <h4 id= "subtitle"><i>Challenge your friends to a game of chess</i></h4>
   <% if user_signed_in? %>
     <%= link_to 'View Available Games', games_path, class: "waves-effect waves-light btn" %>
   <% else %>
