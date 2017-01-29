@@ -1,8 +1,26 @@
 ==========
-Chess
+Konquer
 ==========
 
-With this full-stack Rails web application, users can play a game of chess. It includes all business logic with rules for: moves, capturing pieces, obstruction, check, checkmate, en passant, and castling. This was built with Test-Driven Development in an Agile team of 5 developers as the final project for the [Firehose Project](http://www.thefirehoseproject.com). Guidance for this project was provided by mentor [Mike Coutermarsh](https://github.com/mscoutermarsh) of Product Hunt.
+Konquer is a Rails 4 based application that allows users to challenge one another to a game of chess. Built by a distributed Agile team of 5 developers under the guidance of [Mike Coutermarsh](https://github.com/mscoutermarsh), Software Engineer at Product Hunt, the team followed a Test-Driven Development workflow, regularly performed code reviews and pair-programmed to ensure a consistent, well-tested and team-friendly codebase.
+
+Features
+================
+* Responsive design
+* Moving and capturing pieces
+* Check/Checkmate/Stalemate
+
+Tools
+============
+* TravisCI
+* Heroku
+* Rubocop
+* RSpec
+* Capybara
+* FactoryGirl
+* Devise
+* Omniauth
+* Materialize
 
 Developers
 ============
@@ -16,18 +34,3 @@ Developers
 * Rosie Highsmith | [GitHub](https://github.com/rosiehighsmith)
 
 * Ryan Wooff | [GitHub](https://github.com/ryanveroniwooff)
-
-Features
-================
-* TBD
-
-Tools
-============
-* Capybara
-* Devise
-* FactoryGirl
-* Materialize
-* Rubocop
-* RSpec
-* TravisCI
-
