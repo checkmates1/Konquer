@@ -20,6 +20,7 @@ h1 {
 }
 
 #heading {
+  margin-top: 10vh;
   margin-bottom: 0;
 }
 
@@ -69,9 +70,4 @@ h1 {
       padding: 20px;
       margin-left: 10px;
     }
-  a:hover,
-  a.active {
-    color: red;
-    background: #efefef;
-  }
 }
