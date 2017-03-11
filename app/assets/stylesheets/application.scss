@@ -38,6 +38,12 @@
   margin: 30px auto;
  }
 
+ #show_game {
+  background: rgba(4,10,10,0.8);
+  margin-top: 30px;
+  padding: 0;
+ }
+
  h4 {
   font-weight: 100;
  }
@@ -48,4 +54,8 @@
 
  .game-listing {
   list-style-type: none;
+ }
+
+ a{
+  color: teal;
  }
