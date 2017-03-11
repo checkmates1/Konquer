@@ -1,50 +1,54 @@
-<h1>Game: <%= @game.id %></h1>
+<div id = "show_game" class = "center card-panel col s3 white-text formatting">
+  <h3><%= @game.name %></h3>
 
-<% if user_signed_in? %>
-  <% if @game.white_player_id == nil %>
-    <%= link_to 'Join Game', game_path(@game, game: { white_player_id: current_user.id }), method: :put %>
-  <% elsif @game.black_player_id == nil && @game.white_player_id != nil %>
-    <% if @game.white_player_id == current_user.id %>
-      <p> Waiting for one more player </p>
+  <% if user_signed_in? %>
+    <% if @game.white_player_id == nil %>
+      <%= link_to 'Join Game', game_path(@game, game: { white_player_id: current_user.id }), method: :put %>
+    <% elsif @game.black_player_id == nil && @game.white_player_id != nil %>
+      <% if @game.white_player_id == current_user.id %>
+        <p> Waiting for opponent </p>
+      <% else %>
+        <ul class="collection">
+          <%= render "games/player_detail", player: @white_player, color: "White" %>
+          <li class="collection-item valign-wrapper">
+            <%= link_to 'Join Game', game_path(@game, game: { black_player_id: current_user.id }), class: 'btn btn-flat waves-effect', method: :put %>
+          </li>
+        </ul>
+      <% end %>
     <% else %>
       <ul class="collection">
         <%= render "games/player_detail", player: @white_player, color: "White" %>
-        <li class="collection-item valign-wrapper">
-          <%= link_to 'Join Game', game_path(@game, game: { black_player_id: current_user.id }), class: 'btn btn-flat waves-effect', method: :put %>
-        </li>
+        <%= render "games/player_detail", player: @black_player, color: "Black" %>
       </ul>
+      <%= link_to 'Try Another Game', root_path %>
     <% end %>
   <% else %>
-    <ul class="collection">
-      <%= render "games/player_detail", player: @white_player, color: "White" %>
-      <%= render "games/player_detail", player: @black_player, color: "Black" %>
-    </ul>
-    <%= link_to 'Try Another Game', root_path %>
+    <%= link_to 'Sign In To Join', new_user_session_path %>
+    <br  />
+    <%= link_to 'Sign Up To Join', new_user_registration_path %>
   <% end %>
-<% else %>
-  <%= link_to 'Sign In To Join', new_user_session_path %>
-  <br  />
-  <%= link_to 'Sign Up To Join', new_user_registration_path %>
-<% end %>
 
-<h6><%= link_to 'Go back to open games', root_path %></h6>
+  <h6><%= link_to 'Return to open games', games_path %></h6>
+  <br />
 
-<% if user_signed_in? %>
-  <% if @game.winning_player == nil && @game.white_player_id && @game.black_player_id %>
-    <%= link_to 'Forfeit', forfeit_game_path(@game), method: :put %>
+  <% if user_signed_in? %>
+    <% if @game.winning_player == nil && @game.white_player_id && @game.black_player_id %>
+      <%= link_to 'Forfeit', forfeit_game_path(@game), method: :put %>
+    <% end %>
   <% end %>
-<% end %>
 
-<% if (@game.winning_player == nil && @game.white_player_id && @game.black_player_id)  && @game.pieces != []%>
-  <% if @game.stalemate? %>
-    <%= redirect_to stalemate_game_path(@game), method: :put %>
+  <% if (@game.winning_player == nil && @game.white_player_id && @game.black_player_id)  && @game.pieces != []%>
+    <% if @game.stalemate? %>
+      <%= redirect_to stalemate_game_path(@game), method: :put %>
+    <% end %>
   <% end %>
-<% end %>
-
-<div class="grass valign-wrapper green lighten-3">
-  <div class="card-panel frame">
-    <div class="spacing">
-      <%= render "games/board" %>
+</div>
+  <div class="grass valign-wrapper lighten-3">
+    <div class="card-panel frame">
+      <div class="spacing">
+        <%= render "games/board" %>
+      </div>
     </div>
   </div>
-</div>
+
+
